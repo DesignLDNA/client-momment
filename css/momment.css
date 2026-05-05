@@ -3935,6 +3935,185 @@ html { scroll-padding-top: 100px; }
 }
 
 /* ============================================================
+   MOBILE — center alignment + layout fixes (≤ 768px)
+   Comprehensive pass: every section header centers, card internals
+   center where it reads better, broken hardcoded layouts get fixed.
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* ---------- Section heads — universal center ---------- */
+  .problem__head,
+  .solution__head,
+  .spaces__head,
+  .differentials__head,
+  .steps__head,
+  .plans__head,
+  .audience__head,
+  .community__head,
+  .bastidores__head,
+  .faq__head,
+  .spaces-detail__head,
+  .plans-block__head,
+  .contact-location__head,
+  .about-values__head {
+    text-align: center;
+    align-items: center;
+  }
+  .problem__head > *,
+  .solution__head > *,
+  .spaces__head-text > *,
+  .differentials__head > *,
+  .steps__head > *,
+  .plans__head > *,
+  .audience__head > *,
+  .community__head > *,
+  .bastidores__head > *,
+  .faq__head > *,
+  .spaces-detail__head > *,
+  .plans-block__head > *,
+  .contact-location__head > *,
+  .about-values__head > * {
+    margin-inline: auto;
+  }
+
+  /* Spaces head was a 2-col header on desktop — stack and center on mobile */
+  .spaces__head { flex-direction: column; gap: var(--s-4); }
+  .spaces__head-text { text-align: center; align-items: center; }
+  .spaces__lede { text-align: center; max-width: 60ch; margin-inline: auto; }
+
+  /* Solution intro block (eyebrow + h2 + body) — center */
+  .solution { text-align: center; align-items: center; }
+  .solution__head, .solution__body { align-items: center; text-align: center; }
+  .solution__body { max-width: 60ch; margin-inline: auto; }
+
+  /* ---------- Hero — center copy, CTAs, features ---------- */
+  .hero__copy { align-items: center; text-align: center; }
+  .hero__title-group { align-items: center; text-align: center; }
+  .hero__title em, .hero__title { max-width: none; }
+  .hero__sub { max-width: 50ch; margin-inline: auto; }
+  .hero__ctas { justify-content: center; }
+  .hero__features { justify-content: center; }
+  .hero__badge { align-self: center; }
+
+  /* ---------- Page hero (Sobre, Planos, Contato) ---------- */
+  .page-hero { text-align: center; align-items: center; }
+  .page-hero > * { margin-inline: auto; }
+
+  /* ---------- Impact ---------- */
+  .impact__stat { text-align: center; }
+
+  /* ---------- Problem cards — hide hardcoded illustrations on mobile,
+     center title + body ---------- */
+  .problem-card { text-align: center; align-items: center; padding: var(--s-6); }
+  .problem-card__illustration { display: none; }
+
+  /* ---------- Solution + brands marquee — keep marquee animated;
+     just center the surrounding labels ---------- */
+  .brands__top, .brands__bottom { text-align: center; }
+
+  /* ---------- Spaces preview (Home interactive tabs) ---------- */
+  .space-preview__details { text-align: center; align-items: center; }
+  .space-preview__amenities { justify-content: center; }
+  .space-preview__cta { align-self: center; }
+
+  /* ---------- Differentials pillar rows — already stack; center text ---------- */
+  .pillar-text { text-align: center; align-items: center; }
+  .pillar-text__title, .pillar-text__body { max-width: 50ch; margin-inline: auto; }
+
+  /* ---------- Steps cards — center ---------- */
+  .step-card { text-align: center; align-items: center; }
+  .step-card__top { justify-content: center; }
+  .step-card__body { align-items: center; text-align: center; }
+
+  /* ---------- Plan cards — center most, leave price + features as-is ---------- */
+  .plan-card { text-align: center; align-items: center; }
+  .plan-card__price { justify-content: center; }
+  .plan-card__features { align-self: stretch; }
+  .plan-card__feature { justify-content: flex-start; text-align: left; }
+  .plan-card__cta { align-self: stretch; }
+  .plan-card__badge { left: 50%; transform: translateX(-50%); }
+
+  /* Inauguração callout: stack and center */
+  .inaug { text-align: center; align-items: center; }
+  .inaug__text { align-items: center; }
+
+  /* ---------- Audience cards ---------- */
+  .audience-card { text-align: center; align-items: center; }
+  .audience-card__features { align-self: stretch; }
+  .audience-card__feature { justify-content: flex-start; text-align: left; }
+
+  /* ---------- Community ---------- */
+  .comm-photo__title, .comm-photo__sub { max-width: 38ch; }
+  .comm-card { text-align: center; align-items: center; }
+  .community__quote { text-align: center; }
+
+  /* ---------- Bastidores video cards ---------- */
+  .video-card { margin-inline: auto; }
+
+  /* ---------- FAQ — center the head, keep accordion items left-aligned for legibility ---------- */
+  .faq__layout > .faq__head { align-items: center; text-align: center; }
+  .faq__list { text-align: left; }
+  .faq__a { text-align: left; }
+
+  /* ---------- About story — center copy ---------- */
+  .about-story__copy { text-align: center; align-items: center; }
+  .about-story__copy > * { margin-inline: auto; }
+  .about-story__pullquote {
+    border-left: none;
+    border-top: 2px solid var(--coral-500);
+    padding: var(--s-4) var(--s-3) 0;
+    text-align: center;
+    max-width: 38ch;
+  }
+
+  /* ---------- About values cards ---------- */
+  .value-card { text-align: center; align-items: center; }
+  .value-card__top { justify-content: center; gap: var(--s-3); }
+
+  /* ---------- About CTA + Page CTA — already centered, keep ---------- */
+  .page-cta { text-align: center; align-items: center; }
+  .page-cta > * { margin-inline: auto; }
+
+  /* ---------- Final CTA (home) — already centered ---------- */
+  .final-cta__title em, .final-cta__lede { margin-inline: auto; }
+
+  /* ---------- Spaces detail (Planos page) ---------- */
+  .space-row__copy { text-align: center; align-items: center; }
+  .space-row__features { align-self: stretch; }
+  .space-row__feature { justify-content: flex-start; text-align: left; }
+  .space-row__cta { align-self: center; }
+
+  /* ---------- Plans block + avulsos table ---------- */
+  .plans-block__lede { margin-inline: auto; }
+  .avulsos__title { text-align: center; }
+  .avulsos__row { text-align: center; }
+  .avulsos__cell-name, .avulsos__cell-desc, .avulsos__cell-price { text-align: center; }
+
+  /* ---------- Contato form section: form stays as-is, info aside centers ---------- */
+  .contact-form__head { text-align: center; align-items: center; }
+  .contact-info { align-items: stretch; }
+  .contact-info__block { text-align: left; } /* keep info left for scannability */
+
+  /* ---------- Visit block coral card centers ---------- */
+  .visit-block__card { text-align: center; align-items: center; }
+  .visit-block__actions { justify-content: center; }
+
+  /* ---------- Login welcome overlay — already left-pinned, that's fine ---------- */
+
+  /* ---------- Footer brand description center on mobile ---------- */
+  .site-footer__brand { align-items: center; text-align: center; }
+  .site-footer__brand-desc { max-width: none; }
+  .site-footer__cols { text-align: center; }
+  .site-footer__col { align-items: center; }
+  .site-footer__contact-item { text-align: left; max-width: 280px; margin-inline: auto; }
+  .site-footer__social { align-items: center; text-align: center; }
+  .site-footer__social-icons { justify-content: center; }
+  .site-footer__bottom { text-align: center; }
+  .site-footer__copy { text-align: center; }
+  .site-footer__legal { justify-content: center; }
+}
+
+/* ============================================================
    REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
