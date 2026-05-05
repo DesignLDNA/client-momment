@@ -4197,10 +4197,15 @@ body.is-drawer-open { overflow: hidden; }
   /* ---------- Impact ---------- */
   .impact__stat { text-align: center; }
 
-  /* ---------- Problem cards — hide hardcoded illustrations on mobile,
-     center title + body ---------- */
-  .problem-card { text-align: center; align-items: center; padding: var(--s-6); }
-  .problem-card__illustration { display: none; }
+  /* ---------- Problem cards — scale the hardcoded-pixel illustrations so
+     they fit narrow cards instead of overflowing/clipping. Center text. ---------- */
+  .problem-card { text-align: center; align-items: center; padding: var(--s-6) var(--s-4); }
+  .problem-card__illustration {
+    transform: scale(0.78);
+    transform-origin: top center;
+    height: 165px; /* 211 * 0.78 ≈ 165 */
+    margin-bottom: -8px;
+  }
 
   /* ---------- Solution + brands marquee — keep marquee animated;
      just center the surrounding labels ---------- */
