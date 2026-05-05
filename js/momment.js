@@ -9,6 +9,82 @@
   document.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  /* ---------- Mobile drawer (hamburger) ---------- */
+  const menuBtn = document.getElementById('menuBtn');
+  if (menuBtn) {
+    // Detect current page for active marker
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const navLinks = [
+      { href: 'index.html', label: 'Início' },
+      { href: 'sobre.html', label: 'Sobre' },
+      { href: 'espacos-e-planos.html', label: 'Espaços & Planos' },
+      { href: 'contato.html', label: 'Contato' }
+    ];
+    const navHTML = navLinks.map(l => {
+      const active = l.href === path ? ' aria-current="page"' : '';
+      return `<a href="${l.href}"${active}>${l.label}<i class="ph ph-arrow-right" aria-hidden="true"></i></a>`;
+    }).join('');
+
+    const drawer = document.createElement('div');
+    drawer.className = 'mobile-drawer';
+    drawer.setAttribute('role', 'dialog');
+    drawer.setAttribute('aria-label', 'Menu de navegação');
+    drawer.setAttribute('aria-hidden', 'true');
+    drawer.innerHTML = `
+      <div class="mobile-drawer__backdrop" data-close></div>
+      <div class="mobile-drawer__panel">
+        <div class="mobile-drawer__head">
+          <a href="index.html" aria-label="Momment Coworking — página inicial">
+            <img class="mobile-drawer__logo" src="assets/logo-momment.svg" alt="Momment Coworking">
+          </a>
+          <button class="mobile-drawer__close" type="button" aria-label="Fechar menu" data-close>
+            <i class="ph ph-x" aria-hidden="true"></i>
+          </button>
+        </div>
+        <nav class="mobile-drawer__nav" aria-label="Navegação principal">
+          ${navHTML}
+        </nav>
+        <a href="login.html" class="mobile-drawer__login"${path === 'login.html' ? ' aria-current="page"' : ''}>
+          <span>Entrar</span> <i class="ph ph-sign-in" aria-hidden="true"></i>
+        </a>
+        <a href="https://wa.me/5543000000000" target="_blank" rel="noopener noreferrer" class="mobile-drawer__cta">
+          <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
+          Falar no WhatsApp
+        </a>
+        <div class="mobile-drawer__contact">
+          <span>(43) 0000-0000 · <a href="mailto:ola@momment.com.br">ola@momment.com.br</a></span>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(drawer);
+
+    const open = () => {
+      drawer.classList.add('is-open');
+      document.body.classList.add('is-drawer-open');
+      menuBtn.classList.add('is-active');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+    };
+    const close = () => {
+      drawer.classList.remove('is-open');
+      document.body.classList.remove('is-drawer-open');
+      menuBtn.classList.remove('is-active');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+    };
+
+    menuBtn.addEventListener('click', () => {
+      drawer.classList.contains('is-open') ? close() : open();
+    });
+    drawer.addEventListener('click', (e) => {
+      if (e.target.closest('[data-close]')) close();
+    });
+    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) close();
+    });
+  }
+
   // Spaces — interactive tabs
   const SPACES = {
     estacao: {
