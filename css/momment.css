@@ -240,6 +240,11 @@ p { margin: 0; }
 .site-header__cta { color: var(--cream-100); }
 .site-header__cta i { font-size: 20px; }
 
+@media (max-width: 1023px) {
+  /* On mobile/tablet: only logo + hamburger.
+     Nav, login link, and WhatsApp CTA all live in the drawer. */
+  .site-header__cta { display: none; }
+}
 @media (min-width: 1024px) {
   .site-header__nav { display: flex; }
   .login-link { display: inline-flex; }
