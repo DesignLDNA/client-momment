@@ -3674,8 +3674,55 @@ html { scroll-padding-top: 100px; }
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(16,16,16,0) 60%, rgba(16,16,16,0.18) 100%);
+  background: linear-gradient(180deg, rgba(16,16,16,0) 35%, rgba(16,16,16,0.55) 75%, rgba(16,16,16,0.88) 100%);
   pointer-events: none;
+}
+.login-page__welcome {
+  position: absolute;
+  left: var(--s-10);
+  right: var(--s-10);
+  bottom: var(--s-10);
+  z-index: 2;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.login-page__welcome-eyebrow {
+  font: 500 12px/1 var(--font-sans);
+  color: var(--coral-500);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.login-page__welcome-eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--coral-500);
+  box-shadow: 0 0 0 4px rgba(255, 114, 98, 0.25);
+  animation: dot-pulse 2.4s ease-in-out infinite;
+}
+.login-page__welcome-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 3vw, 36px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 0;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
+  max-width: 24ch;
+}
+.login-page__welcome-sub {
+  font: 400 16px/1.55 var(--font-sans);
+  color: rgba(255, 246, 242, 0.88);
+  margin: 0;
+  max-width: 36ch;
 }
 .login-page__content {
   display: flex;
@@ -3866,14 +3913,22 @@ html { scroll-padding-top: 100px; }
   }
   .login-page__media {
     aspect-ratio: 16 / 9;
-    max-height: 360px;
+    max-height: 380px;
+  }
+  .login-page__welcome {
+    left: var(--s-6);
+    right: var(--s-6);
+    bottom: var(--s-6);
   }
   .login-page__content {
     padding: var(--s-10) var(--s-6);
   }
 }
 @media (max-width: 640px) {
-  .login-page__media { max-height: 240px; }
+  .login-page__media { max-height: 280px; }
+  .login-page__welcome { left: var(--s-4); right: var(--s-4); bottom: var(--s-4); gap: var(--s-2); }
+  .login-page__welcome-title { font-size: 22px; }
+  .login-page__welcome-sub { font-size: 14px; }
   .login-page__content { padding: var(--s-8) var(--s-4); }
   .login-card { padding: var(--s-6); }
   .login-card__title { font-size: 26px; }
