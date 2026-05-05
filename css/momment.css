@@ -4375,16 +4375,26 @@ body.is-drawer-open { overflow: hidden; }
   .pillar-text { text-align: center; align-items: center; }
   .pillar-text__title, .pillar-text__body { max-width: 50ch; margin-inline: auto; }
 
-  /* ---------- Steps cards — center ---------- */
-  .step-card { text-align: center; align-items: center; }
+  /* ---------- Steps cards — center number + body, icon to top-right corner ---------- */
+  .step-card {
+    text-align: center;
+    align-items: center;
+    position: relative;
+    padding-top: 56px; /* room for the corner icon */
+  }
   .step-card__top { justify-content: center; }
+  .step-card__icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
   .step-card__body { align-items: center; text-align: center; }
 
-  /* ---------- Plan cards — center most, leave price + features as-is ---------- */
+  /* ---------- Plan cards — center every line, including features ---------- */
   .plan-card { text-align: center; align-items: center; }
   .plan-card__price { justify-content: center; }
-  .plan-card__features { align-self: stretch; }
-  .plan-card__feature { justify-content: flex-start; text-align: left; }
+  .plan-card__features { align-self: center; align-items: center; width: 100%; }
+  .plan-card__feature { justify-content: center; text-align: center; }
   .plan-card__cta { align-self: stretch; }
   .plan-card__badge { left: 50%; transform: translateX(-50%); }
 
@@ -4392,14 +4402,16 @@ body.is-drawer-open { overflow: hidden; }
   .inaug { text-align: center; align-items: center; }
   .inaug__text { align-items: center; }
 
-  /* ---------- Audience cards ---------- */
+  /* ---------- Audience cards — every line centered, including features ---------- */
   .audience-card { text-align: center; align-items: center; }
-  .audience-card__features { align-self: stretch; }
-  .audience-card__feature { justify-content: flex-start; text-align: left; }
+  .audience-card__features { align-self: center; align-items: center; width: 100%; }
+  .audience-card__feature { justify-content: center; text-align: center; }
 
-  /* ---------- Community ---------- */
+  /* ---------- Community — center the two text-only cards (Marcas / Eventos)
+     including their icons. The photo card (Networking) keeps its own layout. ---------- */
   .comm-photo__title, .comm-photo__sub { max-width: 38ch; }
   .comm-card { text-align: center; align-items: center; }
+  .comm-card .comm-card__icon { align-self: center; }
   .community__quote { text-align: center; }
 
   /* ---------- Bastidores video cards ---------- */
@@ -4461,8 +4473,22 @@ body.is-drawer-open { overflow: hidden; }
   .site-footer__cols { text-align: center; }
   .site-footer__col { align-items: center; }
   .site-footer__contact-item { text-align: left; max-width: 280px; margin-inline: auto; }
-  .site-footer__social { align-items: center; text-align: center; }
-  .site-footer__social-icons { justify-content: center; }
+
+  /* Conecte-se: stack label above icons, both centered as a column */
+  .site-footer__social {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--s-4);
+    width: 100%;
+  }
+  .site-footer__social-icons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  /* Drop the wide left margin on back-to-top so it sits in the same cluster */
+  .site-footer__top { margin-left: 0; }
+
   .site-footer__bottom { text-align: center; }
   .site-footer__copy { text-align: center; }
   .site-footer__legal { justify-content: center; }
