@@ -4402,8 +4402,9 @@ body.is-drawer-open { overflow: hidden; }
   .inaug { text-align: center; align-items: center; }
   .inaug__text { align-items: center; }
 
-  /* ---------- Audience cards — every line centered, including features ---------- */
+  /* ---------- Audience cards — every line centered, including icon + features ---------- */
   .audience-card { text-align: center; align-items: center; }
+  .audience-card .audience-card__icon { align-self: center; }
   .audience-card__features { align-self: center; align-items: center; width: 100%; }
   .audience-card__feature { justify-content: center; text-align: center; }
 
