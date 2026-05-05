@@ -3653,12 +3653,35 @@ html { scroll-padding-top: 100px; }
    ============================================================ */
 .login-page {
   background: var(--cream-100);
-  padding-block: 96px;
-  padding-inline: max(var(--s-6), calc((100% - 1200px) / 2));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 220px);
+  align-items: stretch;
+}
+.login-page__media {
+  position: relative;
+  overflow: hidden;
+  background: var(--cream-200);
+  margin: 0;
+}
+.login-page__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.login-page__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16,16,16,0) 60%, rgba(16,16,16,0.18) 100%);
+  pointer-events: none;
+}
+.login-page__content {
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
-  min-height: calc(100vh - 280px);
+  padding: var(--s-12) max(var(--s-8), calc((100% - 480px) / 2));
 }
 .login-card {
   width: 100%;
@@ -3677,19 +3700,6 @@ html { scroll-padding-top: 100px; }
   flex-direction: column;
   gap: var(--s-2);
   margin-bottom: var(--s-3);
-}
-.login-card__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: var(--r-md);
-  background: var(--cream-200);
-  color: var(--coral-500);
-  font-size: 28px;
-  margin-bottom: var(--s-3);
-  align-self: flex-start;
 }
 .login-card__eyebrow {
   font: 500 12px/1 var(--font-sans);
@@ -3849,8 +3859,22 @@ html { scroll-padding-top: 100px; }
 .login-notice a { color: var(--coral-500); font-weight: 600; text-decoration: none; }
 .login-notice a:hover { text-decoration: underline; }
 
+@media (max-width: 1024px) {
+  .login-page {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .login-page__media {
+    aspect-ratio: 16 / 9;
+    max-height: 360px;
+  }
+  .login-page__content {
+    padding: var(--s-10) var(--s-6);
+  }
+}
 @media (max-width: 640px) {
-  .login-page { padding-block: 56px; }
+  .login-page__media { max-height: 240px; }
+  .login-page__content { padding: var(--s-8) var(--s-4); }
   .login-card { padding: var(--s-6); }
   .login-card__title { font-size: 26px; }
 }
