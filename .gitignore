@@ -1,0 +1,22 @@
+# Internal — not for deploy or public repo
+_archive/
+_partials/
+screenshots/
+uploads/
+.claude/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Node (in case anyone runs serve/dev tools)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Env
+.env
+.env.local

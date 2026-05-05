@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contato e visita | Momment Coworking Arapongas</title>
+<meta name="description" content="Fale com a Momment no WhatsApp ou agende uma visita guiada ao espaço em Arapongas. Resposta em até 1 hora útil.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+
+<link rel="stylesheet" href="css/momment.css">
+</head>
+<body>
+
+<a href="#main" class="skip-link">Pular para conteúdo</a>
+
+<!-- COUNTDOWN BANNER -->
+<div class="banner" role="status" id="banner">
+  <div class="banner__row">
+    <span class="banner__dot" aria-hidden="true"></span>
+    <span>Inauguração em Arapongas</span>
+    <span class="banner__count" aria-live="off">
+      <span><b id="cd-d">67</b>dias</span>
+      <span><b id="cd-h">10</b>h</span>
+      <span><b id="cd-m">32</b>min</span>
+      <span><b id="cd-s">08</b>s</span>
+    </span>
+    <span class="banner__sep">·</span>
+    <a href="https://wa.me/5543000000000?text=Quero%20ser%20inaugurador%20da%20Momment" target="_blank" rel="noopener noreferrer" class="banner__link">Seja inaugurador</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader" role="banner">
+  <div class="site-header__inner">
+    <a href="index.html" class="site-header__brand" aria-label="Momment Coworking — página inicial">
+      <img src="assets/logo-momment.svg" alt="Momment Coworking" class="site-header__logo">
+    </a>
+    <nav class="site-header__nav" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="espacos-e-planos.html">Espaços &amp; Planos</a>
+      <a href="contato.html" aria-current="page">Contato</a>
+    </nav>
+    <div class="site-header__actions">
+      <a href="#login" class="login-link">
+        Entrar <i class="ph ph-sign-in"></i>
+      </a>
+      <a href="https://wa.me/5543000000000" class="btn btn--primary site-header__cta" target="_blank" rel="noopener noreferrer">
+        <i class="ph-fill ph-whatsapp-logo"></i>
+        Falar no WhatsApp
+      </a>
+      <button class="menu-toggle" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
+        <i class="ph ph-list"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" aria-label="Contato">
+    <p class="page-hero__eyebrow">Contato</p>
+    <h1 class="page-hero__title">
+      Vamos <em>conversar.</em>
+    </h1>
+    <p class="page-hero__lede">
+      WhatsApp é o caminho mais rápido — resposta em até 1 hora útil. Se preferir, agende uma visita ou deixe seu recado abaixo.
+    </p>
+  </section>
+
+  <!-- VISIT BLOCK: photo + overlapping coral card -->
+  <section class="visit-block" aria-label="Venha visitar">
+    <div class="visit-block__inner">
+      <figure class="visit-block__photo">
+        <img src="assets/img (1).png" alt="Café e copa do espaço Momment com máquina espresso e mesa comum">
+      </figure>
+      <article class="visit-block__card">
+        <p class="visit-block__eyebrow">Visita guiada</p>
+        <h2 class="visit-block__title">
+          Venha tomar um café <em>com a gente.</em>
+        </h2>
+        <p class="visit-block__sub">
+          Tour de 20 minutos com hora marcada. Mostramos o espaço, conversamos sobre o que você precisa, e o café fica no fogão te esperando.
+        </p>
+        <div class="visit-block__actions">
+          <a href="https://wa.me/5543000000000?text=Quero%20agendar%20uma%20visita%20guiada" target="_blank" rel="noopener noreferrer" class="visit-block__cta">
+            <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
+            Agendar visita
+          </a>
+          <a href="#form" class="visit-block__cta-secondary">
+            Prefiro escrever <i class="ph ph-arrow-down" aria-hidden="true"></i>
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FORM (centered, single column) -->
+  <section class="contact-form-section" id="form" aria-label="Formulário de contato">
+    <form class="contact-form" id="contactForm" novalidate>
+      <header class="contact-form__head">
+        <p class="contact-form__eyebrow">Deixa seu recado</p>
+        <h2 class="contact-form__title">Conta pra gente <em>o que você precisa.</em></h2>
+        <p class="contact-form__sub">A gente responde no WhatsApp ou e-mail em até 1 hora útil.</p>
+      </header>
+
+      <div class="form-field">
+        <label class="form-label" for="contact-nome">Nome</label>
+        <input class="form-input" type="text" id="contact-nome" name="nome" placeholder="Como prefere ser chamado" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="contact-email">E-mail</label>
+          <input class="form-input" type="email" id="contact-email" name="email" placeholder="seu@email.com" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="contact-whatsapp">WhatsApp</label>
+          <input class="form-input" type="tel" id="contact-whatsapp" name="whatsapp" placeholder="(43) 9 0000-0000" required>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="contact-tipo">Interesse</label>
+        <select class="form-select" id="contact-tipo" name="tipo" required>
+          <option value="" disabled selected>Escolhe um...</option>
+          <option value="visita">Quero agendar uma visita guiada</option>
+          <option value="day-use">Day Use</option>
+          <option value="flex">Flex Mensal (10 diárias)</option>
+          <option value="premium">Mensalista Premium</option>
+          <option value="anual">Plano Anual (inaugurador)</option>
+          <option value="privativa">Sala privativa pra equipe</option>
+          <option value="reuniao">Sala de reunião por hora</option>
+          <option value="treinamento">Sala de treinamento / evento</option>
+          <option value="endereco">Endereço fiscal</option>
+          <option value="outro">Outro assunto</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="contact-msg">Mensagem</label>
+        <textarea class="form-textarea" id="contact-msg" name="mensagem" placeholder="Conta pra gente o que você precisa — quantas pessoas, quando começa, alguma dúvida específica…"></textarea>
+        <span class="form-helper">Opcional. Se preferir, só envie e a gente puxa o resto pelo WhatsApp.</span>
+      </div>
+
+      <button type="submit" class="form-submit">
+        Enviar mensagem <i class="ph ph-arrow-right" aria-hidden="true"></i>
+      </button>
+
+      <p class="form-fineprint">
+        Ao enviar você concorda em receber resposta no WhatsApp ou e-mail informados. A gente <strong>não</strong> compartilha seus dados — <a href="#privacidade">política de privacidade</a>.
+      </p>
+    </form>
+
+    <aside class="contact-info" aria-label="Contato direto">
+      <ul class="contact-info__list">
+        <li>
+          <a href="https://wa.me/5543000000000?text=Quero%20falar%20com%20a%20Momment" target="_blank" rel="noopener noreferrer" class="contact-info__block">
+            <span class="contact-info__icon" aria-hidden="true"><i class="ph-fill ph-whatsapp-logo"></i></span>
+            <span class="contact-info__copy">
+              <span class="contact-info__label">WhatsApp</span>
+              <span class="contact-info__value">(43) 0000-0000</span>
+              <span class="contact-info__meta">Resposta em até 1h útil</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="tel:+554300000000" class="contact-info__block">
+            <span class="contact-info__icon" aria-hidden="true"><i class="ph ph-phone"></i></span>
+            <span class="contact-info__copy">
+              <span class="contact-info__label">Telefone</span>
+              <span class="contact-info__value">(43) 0000-0000</span>
+              <span class="contact-info__meta">Seg–Sex · 7h às 22h</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:ola@momment.com.br" class="contact-info__block">
+            <span class="contact-info__icon" aria-hidden="true"><i class="ph ph-envelope-simple"></i></span>
+            <span class="contact-info__copy">
+              <span class="contact-info__label">E-mail</span>
+              <span class="contact-info__value">ola@momment.com.br</span>
+              <span class="contact-info__meta">Resposta em até 24h</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Arapongas%2C+PR" target="_blank" rel="noopener noreferrer" class="contact-info__block">
+            <span class="contact-info__icon" aria-hidden="true"><i class="ph ph-map-pin"></i></span>
+            <span class="contact-info__copy">
+              <span class="contact-info__label">Endereço</span>
+              <span class="contact-info__value">Rua das Araucárias, 000</span>
+              <span class="contact-info__meta">Centro · Arapongas/PR</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="contact-info__social">
+        <p class="contact-info__social-label">Conecte-se com a Momment</p>
+        <div class="contact-info__social-icons">
+          <a href="https://instagram.com/momment.coworking" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="ph ph-instagram-logo" aria-hidden="true"></i>
+          </a>
+          <a href="https://facebook.com/momment.coworking" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <i class="ph ph-facebook-logo" aria-hidden="true"></i>
+          </a>
+          <a href="https://wa.me/5543000000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- LOCATION: full-width map with address card overlay -->
+  <section class="contact-location" aria-label="Onde estamos">
+    <header class="contact-location__head">
+      <p class="contact-location__eyebrow">Onde estamos</p>
+      <h2 class="contact-location__title">
+        No coração de <em>Arapongas</em>, com vaga e café à sua espera.
+      </h2>
+      <p class="contact-location__lede">
+        20 minutos de Maringá, 1h30 de Londrina. Cidade do móvel, com a qualidade do móvel já dentro de casa.
+      </p>
+    </header>
+
+    <figure class="contact-location__map" aria-label="Mapa de Arapongas, Paraná">
+      <iframe
+        title="Localização Momment Coworking — Arapongas, PR"
+        src="https://maps.google.com/maps?q=Arapongas%2C+PR&t=&z=14&ie=UTF8&iwloc=&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen=""></iframe>
+
+      <aside class="contact-location__overlay" aria-label="Endereço">
+        <p class="contact-location__overlay-eyebrow">Endereço</p>
+        <p class="contact-location__overlay-address">Rua das Araucárias, 000<br>Centro · Arapongas/PR</p>
+        <p class="contact-location__overlay-meta">Seg–Sex · 7h às 22h<br>Estacionamento próprio + zona azul.</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Arapongas%2C+PR" target="_blank" rel="noopener noreferrer" class="contact-location__overlay-cta">
+          Ver rota <i class="ph ph-arrow-right" aria-hidden="true"></i>
+        </a>
+      </aside>
+    </figure>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo" aria-label="Rodapé">
+  <div class="site-footer__main">
+    <div class="site-footer__brand">
+      <p class="site-footer__brand-desc">
+        Coworking premium em Arapongas. Sala, móvel, silêncio — feitos por quem é daqui.
+      </p>
+      <img class="site-footer__logo" src="assets/footer-logo-momment.svg" alt="Momment Coworking">
+    </div>
+
+    <div class="site-footer__right">
+      <nav class="site-footer__cols" aria-label="Navegação do rodapé">
+        <div class="site-footer__col">
+          <p class="site-footer__col-title">Navegação</p>
+          <a href="espacos-e-planos.html">Espaços</a>
+          <a href="espacos-e-planos.html#tabela-planos">Planos</a>
+          <a href="index.html#bastidores">Bastidores</a>
+          <a href="index.html#faq">FAQ</a>
+          <a href="#login">Área do Cliente</a>
+        </div>
+
+        <div class="site-footer__col">
+          <p class="site-footer__col-title">Contato</p>
+          <p class="site-footer__contact-item">
+            <i class="ph ph-map-pin-line" aria-hidden="true"></i>
+            <span>Rua das Araucárias, 000<br>Centro · Arapongas/PR</span>
+          </p>
+          <p class="site-footer__contact-item">
+            <i class="ph ph-phone" aria-hidden="true"></i>
+            <span>(43) 0000-0000</span>
+          </p>
+          <p class="site-footer__contact-item">
+            <i class="ph ph-envelope-simple" aria-hidden="true"></i>
+            <span>ola@momment.com.br</span>
+          </p>
+          <p class="site-footer__contact-item">
+            <i class="ph ph-clock" aria-hidden="true"></i>
+            <span>Seg–Sex · 7h–22h</span>
+          </p>
+        </div>
+
+        <div class="site-footer__col">
+          <p class="site-footer__col-title">A Casa</p>
+          <a href="sobre.html">Sobre nós</a>
+          <a href="index.html#pra-quem-e">Pra quem é</a>
+          <a href="index.html#comunidade">Comunidade</a>
+          <a href="contato.html">Contato</a>
+        </div>
+      </nav>
+
+      <div class="site-footer__divider" role="presentation"></div>
+
+      <div class="site-footer__social">
+        <p class="site-footer__social-label">Conecte-se com a Momment</p>
+        <div class="site-footer__social-icons">
+          <a href="https://instagram.com/momment.coworking" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="ph ph-instagram-logo" aria-hidden="true"></i>
+          </a>
+          <a href="https://facebook.com/momment.coworking" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <i class="ph ph-facebook-logo" aria-hidden="true"></i>
+          </a>
+          <a href="https://wa.me/5543000000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+          </a>
+          <a href="#top" class="site-footer__top" aria-label="Voltar ao topo" data-tooltip="Voltar ao topo">
+            <i class="ph ph-arrow-up" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <p class="site-footer__copy">
+      © 2026 Momment. Todos os direitos reservados. Arapongas/PR · CNPJ 00.000.000/0001-00
+    </p>
+    <div class="site-footer__legal">
+      <ul class="site-footer__legal-nav">
+        <li><a href="#privacidade">Política de privacidade</a></li>
+        <li><a href="#termos">Termos de uso</a></li>
+        <li><a href="#cookies">Cookies</a></li>
+      </ul>
+      <a href="https://ldnasa.com.br" target="_blank" rel="noopener noreferrer" aria-label="LDNA S/A — agência digital">
+        <img class="site-footer__legal-mark" src="assets/footer-ldna.svg" alt="LDNA S/A">
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/momment.js" defer></script>
+
+</body>
+</html>

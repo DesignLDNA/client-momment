@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momment Coworking Arapongas — sala, móvel, silêncio</title>
+<meta name="description" content="Coworking em Arapongas com salas privativas, mesas em open space e mobiliário premium feito na cidade do móvel. Visite, conheça, decida.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+
+<link rel="preload" as="video" href="assets/video-hero-momment.mp4" type="video/mp4">
+
+<link rel="stylesheet" href="css/momment.css">
+</head>
+<body>
+
+<a href="#main" class="skip-link">Pular para conteúdo</a>
+
+<!-- COUNTDOWN BANNER -->
+<div class="banner" role="status" id="banner">
+  <div class="banner__row">
+    <span class="banner__dot" aria-hidden="true"></span>
+    <span>Inauguração em Arapongas</span>
+    <span class="banner__count" aria-live="off">
+      <span><b id="cd-d">67</b>dias</span>
+      <span><b id="cd-h">10</b>h</span>
+      <span><b id="cd-m">32</b>min</span>
+      <span><b id="cd-s">08</b>s</span>
+    </span>
+    <span class="banner__sep">·</span>
+    <a href="https://wa.me/5543000000000?text=Quero%20ser%20inaugurador%20da%20Momment" target="_blank" rel="noopener noreferrer" class="banner__link">Seja inaugurador</a>
+  </div>
+</div>
+
+<!-- HEADER (default + scrolled floating) -->
+<header class="site-header" id="siteHeader" role="banner">
+  <div class="site-header__inner">
+    <a href="index.html" class="site-header__brand" aria-label="Momment Coworking — página inicial">
+      <img src="assets/logo-momment.svg" alt="Momment Coworking" class="site-header__logo">
+    </a>
+    <nav class="site-header__nav" aria-label="Navegação principal">
+      <a href="index.html" aria-current="page">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="espacos-e-planos.html">Espaços &amp; Planos</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    <div class="site-header__actions">
+      <a href="#login" class="login-link">
+        Entrar <i class="ph ph-sign-in"></i>
+      </a>
+      <a href="https://wa.me/5543000000000" class="btn btn--primary site-header__cta" target="_blank" rel="noopener noreferrer">
+        <i class="ph-fill ph-whatsapp-logo"></i>
+        Falar no WhatsApp
+      </a>
+      <button class="menu-toggle" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
+        <i class="ph ph-list"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top" aria-label="Apresentação Momment">
+    <video class="hero__video"
+           autoplay muted loop playsinline preload="auto"
+           poster="assets/img (1).png"
+           aria-hidden="true">
+      <source src="assets/video-hero-momment.mp4" type="video/mp4">
+    </video>
+    <div class="hero__overlay" aria-hidden="true"></div>
+    <div class="hero__noise" aria-hidden="true"></div>
+
+    <div class="hero__content">
+      <div class="hero__copy">
+        <span class="hero__badge">
+          <i class="ph-fill ph-seal-check"></i>
+          Vagas limitadas para inauguradores
+        </span>
+        <div class="hero__title-group">
+          <h1 class="hero__title">
+            Um lugar feito pra você
+            <em>trabalhar melhor.</em>
+          </h1>
+          <p class="hero__sub">
+            Estrutura profissional, móveis de verdade e o conforto que seu dia de trabalho merece.
+          </p>
+        </div>
+        <div class="hero__ctas">
+          <a href="https://wa.me/5543000000000" class="btn btn--primary btn--lg-hero" target="_blank" rel="noopener noreferrer">
+            <i class="ph-fill ph-whatsapp-logo"></i>
+            Falar no WhatsApp
+          </a>
+          <a href="#cta-final" class="btn btn--ghost-light btn--lg-hero">
+            Quero ser inaugurador
+          </a>
+        </div>
+        <div class="hero__features">
+          <span class="hero__feature"><i class="ph ph-armchair"></i> Móveis premium</span>
+          <span class="hero__feature"><i class="ph ph-wifi-high"></i> Wi-Fi dedicado</span>
+          <span class="hero__feature"><i class="ph ph-speaker-simple-slash"></i> Ambiente silencioso</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT BAND -->
+  <section class="impact" aria-label="Números que importam">
+    <div class="impact__stat">
+      <p class="impact__num"><span class="count-up" data-target="350">350</span><em>m²</em></p>
+      <p class="impact__label">de área pensada pra você trabalhar e descansar.</p>
+    </div>
+    <div class="impact__stat">
+      <p class="impact__num">o maior</p>
+      <p class="impact__label">coworking de Arapongas, e também o melhor.</p>
+    </div>
+    <div class="impact__stat">
+      <p class="impact__num"><span class="count-up" data-target="5">5</span><em>&nbsp;tipos</em></p>
+      <p class="impact__label">de espaço pra cada momento do seu dia.</p>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem" id="problema" aria-label="O que você já viveu">
+    <header class="problem__head">
+      <p class="problem__eyebrow">O que você já viveu</p>
+      <h2 class="problem__title">
+        Todo empresário de Arapongas <em>já passou por isso.</em>
+      </h2>
+    </header>
+
+    <div class="problem__grid">
+      <article class="problem-card problem-card--home-office">
+        <div class="problem-card__illustration">
+          <img class="problem-card__glow"  src="assets/problem-glow-1.svg" alt="" aria-hidden="true">
+          <img class="problem-card__scene" src="assets/problem-scene-home-office.svg" alt="" aria-hidden="true">
+        </div>
+        <h3 class="problem-card__title">Home office que não rende</h3>
+        <p class="problem-card__body">Mesa da cozinha, cadeira da sala de jantar, dois filhos pedindo lanche. No fim do dia, metade do que você precisava entregar continua na lista.</p>
+      </article>
+
+      <article class="problem-card problem-card--cafeteria">
+        <div class="problem-card__illustration">
+          <img class="problem-card__glow"  src="assets/problem-glow-2.svg" alt="" aria-hidden="true">
+          <img class="problem-card__scene" src="assets/problem-scene-cafeteria.svg" alt="" aria-hidden="true">
+        </div>
+        <h3 class="problem-card__title">Reunião em cafeteria</h3>
+        <p class="problem-card__body">Cliente chega, o garçom passa três vezes, o som da máquina abafa o áudio da call. Não é o lugar — e todo mundo sabe.</p>
+      </article>
+
+      <article class="problem-card problem-card--sala">
+        <div class="problem-card__illustration">
+          <img class="problem-card__glow"  src="assets/problem-glow-2.svg" alt="" aria-hidden="true">
+          <img class="problem-card__scene" src="assets/problem-scene-sala-comercial.svg" alt="" aria-hidden="true">
+        </div>
+        <h3 class="problem-card__title">Sala comercial pesa no bolso</h3>
+        <p class="problem-card__body">Aluguel + IPTU + condomínio + mobília + internet + faxina. Pra usar 6 horas por dia, 4 dias por semana. Não fecha a conta.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SOLUTION + SOCIAL PROOF -->
+  <section class="solution-block" id="solucao" aria-label="A Momment">
+    <div class="solution">
+      <span class="solution__badge">A MOMMENT</span>
+      <h2 class="solution__title">
+        O coworking que faltava em Arapongas. <em>Feito por quem é daqui,</em> pra quem entrega de verdade.
+      </h2>
+    </div>
+
+    <div class="brands">
+      <p class="brands__top">Empresas que escolheram a Momment.</p>
+      <div class="brands__marquee" aria-hidden="true">
+        <div class="brands__track">
+          <!-- Set A -->
+          <span class="brand-name">Móveis Bandeirantes</span>
+          <span class="brand-name">Estúdio Linho</span>
+          <span class="brand-name">Ferreira &amp; Cia</span>
+          <span class="brand-name">Norte Sul Tech</span>
+          <span class="brand-name">Casa Joana</span>
+          <span class="brand-name">Studio Verde</span>
+          <!-- Set B (duplicate for seamless loop) -->
+          <span class="brand-name">Móveis Bandeirantes</span>
+          <span class="brand-name">Estúdio Linho</span>
+          <span class="brand-name">Ferreira &amp; Cia</span>
+          <span class="brand-name">Norte Sul Tech</span>
+          <span class="brand-name">Casa Joana</span>
+          <span class="brand-name">Studio Verde</span>
+        </div>
+      </div>
+      <p class="brands__bottom">
+        E esse é só o começo.
+        <a href="#cta-final">Quer fazer parte?</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- SPACES -->
+  <section class="spaces" id="espacos" aria-label="Os espaços">
+    <header class="spaces__head">
+      <div class="spaces__head-text">
+        <p class="spaces__eyebrow">Os espaços</p>
+        <h2 class="spaces__title">
+          Escolha o espaço certo<br>
+          pro <em>seu momento.</em>
+        </h2>
+      </div>
+      <p class="spaces__lede">
+        5 tipos de ambiente, do silêncio total da privativa ao papo de café com o time.<br>
+        Você usa o que precisa, no dia que precisa.
+      </p>
+    </header>
+
+    <div class="spaces__layout">
+      <div class="spaces__list" role="tablist" aria-label="Tipos de espaço">
+        <button class="space-tab is-active" role="tab" aria-selected="true" data-space="estacao">
+          <span class="space-tab__label">Estação Compartilhada</span>
+          <span class="space-tab__icon" aria-hidden="true"><i class="ph ph-arrow-right"></i></span>
+        </button>
+        <button class="space-tab" role="tab" aria-selected="false" data-space="privativa">
+          <span class="space-tab__label">Sala Privativa</span>
+          <span class="space-tab__icon" aria-hidden="true"><i class="ph ph-arrow-right"></i></span>
+        </button>
+        <button class="space-tab" role="tab" aria-selected="false" data-space="reuniao">
+          <span class="space-tab__label">Sala de Reunião</span>
+          <span class="space-tab__icon" aria-hidden="true"><i class="ph ph-arrow-right"></i></span>
+        </button>
+        <button class="space-tab" role="tab" aria-selected="false" data-space="treinamento">
+          <span class="space-tab__label">Sala de Treinamento</span>
+          <span class="space-tab__icon" aria-hidden="true"><i class="ph ph-arrow-right"></i></span>
+        </button>
+        <button class="space-tab" role="tab" aria-selected="false" data-space="cafe">
+          <span class="space-tab__label">Café &amp; Copa</span>
+          <span class="space-tab__icon" aria-hidden="true"><i class="ph ph-arrow-right"></i></span>
+        </button>
+      </div>
+
+      <article class="space-preview" id="spacePreview" role="tabpanel" aria-live="polite">
+        <div class="space-preview__image">
+          <img id="spacePreviewImg" src="assets/img (4).png" alt="Estação Compartilhada">
+          <span class="space-preview__badge" id="spacePreviewMeters">1,5m²</span>
+        </div>
+        <div class="space-preview__details">
+          <div class="space-preview__info">
+            <h3 class="space-preview__name" id="spacePreviewName">Estação Compartilhada</h3>
+            <p class="space-preview__desc" id="spacePreviewDesc">
+              Mesa em open space, cadeira ergonômica, gaveta com chave.<br>
+              Pra quem vem todo dia e prefere o ritmo do salão.
+            </p>
+            <div class="space-preview__amenities" id="spacePreviewAmenities">
+              <span class="space-preview__amenity"><i class="ph ph-users-three"></i> até 16 estações</span>
+              <span class="space-preview__amenity"><i class="ph ph-wifi-high"></i> Wi-Fi dedicado</span>
+              <span class="space-preview__amenity"><i class="ph ph-coffee"></i> café incluso</span>
+            </div>
+          </div>
+          <a href="#planos" class="space-preview__cta">Ver detalhes</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIALS -->
+  <section class="differentials" id="diferenciais" aria-label="Diferenciais">
+    <header class="differentials__head">
+      <p class="differentials__eyebrow">Diferenciais</p>
+      <h2 class="differentials__title">
+        Conforto não é luxo. <em>É produtividade.</em>
+      </h2>
+      <p class="differentials__lede">
+        A Momment tem 4 pilares, e cada um tem nome, fornecedor e história.
+      </p>
+    </header>
+
+    <div class="pillars">
+      <!-- Decorative coral dots scattered around the grid -->
+      <img class="pillar-dot pillar-dot--r2" src="assets/diff-dot.svg" alt="" aria-hidden="true">
+      <img class="pillar-dot pillar-dot--l1" src="assets/diff-dot.svg" alt="" aria-hidden="true">
+      <img class="pillar-dot pillar-dot--r1" src="assets/diff-dot.svg" alt="" aria-hidden="true">
+      <img class="pillar-dot pillar-dot--l2" src="assets/diff-dot.svg" alt="" aria-hidden="true">
+
+      <!-- Pillar 01 — Cadeiras (text left) -->
+      <article class="pillar-row">
+        <div class="pillar-text">
+          <p class="pillar-text__num">PILAR 01</p>
+          <h3 class="pillar-text__title">
+            Cadeiras feitas pra 8 horas,<br>não pra 8 minutos.
+          </h3>
+          <p class="pillar-text__body">
+            Cada cadeira foi escolhida com fornecedor de Arapongas, testada por quem sentou de verdade. Lombar regulável, encosto que segue a coluna, espuma que não amassa em 6 meses.
+          </p>
+        </div>
+        <div class="pillar-image">
+          <img src="assets/img (7).png" alt="Detalhe de cadeira ergonômica em couro" loading="lazy">
+        </div>
+      </article>
+
+      <!-- Pillar 02 — Mesas (image left) -->
+      <article class="pillar-row pillar-row--alt">
+        <div class="pillar-image">
+          <img src="assets/img (2).png" alt="Mesa de carvalho ampla com Macbook e caderno" loading="lazy">
+        </div>
+        <div class="pillar-text">
+          <p class="pillar-text__num">PILAR 02</p>
+          <h3 class="pillar-text__title">
+            Mesas amplas. Cabe o monitor,<br>o caderno e o café.
+          </h3>
+          <p class="pillar-text__body">
+            Madeira maciça, 80 cm de profundidade, passa-cabos embutido. A mesa não briga com você, ela some debaixo do trabalho.
+          </p>
+        </div>
+      </article>
+
+      <!-- Pillar 03 — Silêncio (text left) -->
+      <article class="pillar-row">
+        <div class="pillar-text">
+          <p class="pillar-text__num">PILAR 03</p>
+          <h3 class="pillar-text__title">Silêncio que respeita reunião.</h3>
+          <p class="pillar-text__body">
+            Forro acústico, ripado de madeira nas paredes, divisórias com isolamento. Você liga a câmera e o cliente não escuta a copa.
+          </p>
+        </div>
+        <div class="pillar-image">
+          <img src="assets/img (4).png" alt="Detalhe de parede em ripado de madeira" loading="lazy">
+        </div>
+      </article>
+
+      <!-- Pillar 04 — Infraestrutura (image left) -->
+      <article class="pillar-row pillar-row--alt">
+        <div class="pillar-image">
+          <img src="assets/img (1).png" alt="Salão amplo da Momment com infraestrutura completa" loading="lazy">
+        </div>
+        <div class="pillar-text">
+          <p class="pillar-text__num">PILAR 04</p>
+          <h3 class="pillar-text__title">Infraestrutura que não falha.</h3>
+          <p class="pillar-text__body">
+            Internet redundante (fibra + 4G de backup), nobreak nas tomadas, ar-condicionado split em todas as salas, café espresso de grão de verdade.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="steps" id="como-funciona" aria-label="Como funciona">
+    <header class="steps__head">
+      <p class="steps__eyebrow">Como funciona</p>
+      <h2 class="steps__title">
+        Simples do começo ao fim.<br>
+        <em>Três passos</em> e pronto.
+      </h2>
+    </header>
+
+    <div class="steps__grid">
+      <article class="step-card">
+        <div class="step-card__top">
+          <p class="step-card__num">01</p>
+          <span class="step-card__icon" aria-hidden="true"><i class="ph ph-armchair"></i></span>
+        </div>
+        <div class="step-card__body">
+          <h3 class="step-card__title">Escolha seu espaço</h3>
+          <p class="step-card__text">
+            Day Use, mensal, anual ou sala fechada. Você decide o tamanho, a gente entrega o resto.
+          </p>
+        </div>
+      </article>
+
+      <article class="step-card">
+        <div class="step-card__top">
+          <p class="step-card__num">02</p>
+          <span class="step-card__icon" aria-hidden="true"><i class="ph ph-whatsapp-logo"></i></span>
+        </div>
+        <div class="step-card__body">
+          <h3 class="step-card__title">Fale no WhatsApp</h3>
+          <p class="step-card__text">
+            Chama a gente direto. Sem formulário longo, sem 'um consultor entrará em contato'. Resposta em até 1 hora útil.
+          </p>
+        </div>
+      </article>
+
+      <article class="step-card">
+        <div class="step-card__top">
+          <p class="step-card__num">03</p>
+          <span class="step-card__icon" aria-hidden="true"><i class="ph ph-coffee"></i></span>
+        </div>
+        <div class="step-card__body">
+          <h3 class="step-card__title">Comece a trabalhar</h3>
+          <p class="step-card__text">
+            Chega, pega a chave, senta. Café no fogão, Wi-Fi conectado, sua cadeira esperando.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section class="plans" id="planos" aria-label="Planos">
+    <header class="plans__head">
+      <p class="plans__eyebrow">Planos</p>
+      <h2 class="plans__title">
+        <em>Escolha como</em> quer trabalhar.
+      </h2>
+      <p class="plans__lede">
+        4 formas de entrar, do dia avulso ao plano anual. Sem letra miúda. Sem fidelidade obrigatória, exceto onde você quer trocar fidelidade por preço.
+      </p>
+    </header>
+
+    <div class="plans__grid">
+      <div class="plans__row">
+        <article class="plan-card">
+          <h3 class="plan-card__name">Day Use</h3>
+          <p class="plan-card__sub">Pro dia que o home office não tá rolando.</p>
+          <div class="plan-card__price">
+            <span class="plan-card__currency">R$</span>
+            <span class="plan-card__amount">59</span>
+            <span class="plan-card__period">/dia</span>
+          </div>
+          <ul class="plan-card__features">
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Estação compartilhada</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Café e Wi-Fi inclusos</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Acesso 8h às 20h</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Sem fidelidade</li>
+          </ul>
+          <a href="#cta-final" class="plan-card__cta">Quero o Day Use</a>
+        </article>
+
+        <article class="plan-card">
+          <h3 class="plan-card__name">Flex Mensal</h3>
+          <p class="plan-card__sub">10 diárias por mês, use quando precisar.</p>
+          <div class="plan-card__price">
+            <span class="plan-card__currency">R$</span>
+            <span class="plan-card__amount">390</span>
+            <span class="plan-card__period">/mês</span>
+          </div>
+          <ul class="plan-card__features">
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>10 diárias flexíveis</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Salas de reunião por hora</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Café espresso ilimitado</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Acesso 7h às 22h</li>
+          </ul>
+          <a href="#cta-final" class="plan-card__cta">Quero o Flex</a>
+        </article>
+
+        <article class="plan-card">
+          <h3 class="plan-card__name">Mensalista Premium</h3>
+          <p class="plan-card__sub">Estação fixa, gaveta com chave, ritmo de quem é daqui.</p>
+          <div class="plan-card__price">
+            <span class="plan-card__currency">R$</span>
+            <span class="plan-card__amount">690</span>
+            <span class="plan-card__period">/mês</span>
+          </div>
+          <ul class="plan-card__features">
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Estação fixa garantida</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Gaveta com chave</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>4h de sala de reunião/mês</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Endereço fiscal incluso</li>
+          </ul>
+          <a href="#cta-final" class="plan-card__cta">Quero ser mensalista</a>
+        </article>
+
+        <article class="plan-card plan-card--annual">
+          <span class="plan-card__badge">
+            <i class="ph-fill ph-star" aria-hidden="true"></i>Melhor valor
+          </span>
+          <h3 class="plan-card__name">Plano Anual</h3>
+          <p class="plan-card__sub">12 meses, melhor preço por mês. Pra quem já decidiu.</p>
+          <div class="plan-card__price">
+            <span class="plan-card__currency">R$</span>
+            <span class="plan-card__amount">590</span>
+            <span class="plan-card__period">/mês</span>
+          </div>
+          <ul class="plan-card__features">
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Tudo do Mensalista Premium</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Economia de R$ 1.200/ano</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>8h de sala de reunião/mês</li>
+            <li class="plan-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Convite p/ eventos exclusivos</li>
+          </ul>
+          <a href="#cta-final" class="plan-card__cta">Quero o anual</a>
+        </article>
+      </div>
+
+      <aside class="inaug" aria-label="Oferta de inauguração">
+        <div class="inaug__text">
+          <p class="inaug__eyebrow">Oferta de inauguração</p>
+          <p class="inaug__title">
+            <em>20% de desconto</em> nos 3 primeiros meses pra inauguradores.
+          </p>
+          <p class="inaug__sub">
+            Vagas limitadas. Vale pra qualquer plano mensal ou anual contratado antes da abertura.
+          </p>
+        </div>
+        <a href="#cta-final" class="inaug__cta">
+          Quero ser inaugurador <i class="ph ph-arrow-right" aria-hidden="true"></i>
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- AUDIENCE -->
+  <section class="audience" id="pra-quem-e" aria-label="Pra quem é">
+    <header class="audience__head">
+      <p class="audience__eyebrow">— Pra quem é</p>
+      <h2 class="audience__title">
+        Feito pra quem leva <em>trabalho a sério.</em>
+      </h2>
+    </header>
+
+    <div class="audience__grid">
+      <article class="audience-card">
+        <span class="audience-card__icon" aria-hidden="true"><i class="ph ph-user"></i></span>
+        <div class="audience-card__text">
+          <h3 class="audience-card__title">Profissional liberal</h3>
+          <p class="audience-card__lede">Advogada, contador, arquiteta. Você atende cliente, precisa de endereço sério e sala de reunião na hora certa.</p>
+        </div>
+        <ul class="audience-card__features">
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Sala de reunião reservável</li>
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Endereço fiscal disponível</li>
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Recepção pra cliente</li>
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Café que não decepciona</li>
+        </ul>
+      </article>
+
+      <article class="audience-card">
+        <span class="audience-card__icon" aria-hidden="true"><i class="ph ph-buildings"></i></span>
+        <div class="audience-card__text">
+          <h3 class="audience-card__title">Pequena empresa</h3>
+          <p class="audience-card__lede">Equipe de 3 a 8 pessoas. Cresceu o suficiente pra sair da sala de casa, mas não o bastante pra alugar prédio.</p>
+        </div>
+        <ul class="audience-card__features">
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Sala privativa por equipe</li>
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Logo na porta opcional</li>
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Custo previsível mensal</li>
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Cresce sem mudar de prédio</li>
+        </ul>
+      </article>
+
+      <article class="audience-card">
+        <span class="audience-card__icon" aria-hidden="true"><i class="ph ph-rocket-launch"></i></span>
+        <div class="audience-card__text">
+          <h3 class="audience-card__title">Startup &amp;<br>empreendedor digital</h3>
+          <p class="audience-card__lede">Time híbrido, viaja, atende cliente fora. Vem pra Momment quando precisa de foco, gravação ou reunião que não vaza.</p>
+        </div>
+        <ul class="audience-card__features">
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Wi-Fi de fibra dedicado</li>
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Acústica pra call/podcast</li>
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Day use sem fidelidade</li>
+          <li class="audience-card__feature"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Comunidade que troca real</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section class="community" id="comunidade" aria-label="Comunidade Momment">
+    <header class="community__head">
+      <p class="community__eyebrow">Comunidade Momment</p>
+      <h2 class="community__title">
+        Mais do que um espaço. <em>Uma rede de contatos.</em>
+      </h2>
+    </header>
+
+    <div class="community__grid">
+      <div class="community__row">
+        <article class="comm-photo">
+          <img class="comm-photo__img" src="assets/img (8).png" alt="Pessoas conversando na copa do coworking">
+          <div class="comm-photo__overlay" aria-hidden="true"></div>
+          <span class="comm-card__icon" aria-hidden="true"><i class="ph ph-users-three"></i></span>
+          <h3 class="comm-photo__title">Networking que acontece</h3>
+          <p class="comm-photo__sub">Não 'happy hour com etiqueta', conversa de copa, indicação real,<br>parceria fechada no almoço.</p>
+        </article>
+
+        <div class="community__col">
+          <article class="comm-card">
+            <span class="comm-card__icon" aria-hidden="true"><i class="ph ph-storefront"></i></span>
+            <h3 class="comm-card__title">Marcas parceiras</h3>
+            <p class="comm-card__body">Móveis, café, design, contabilidade.<br>Quem está aqui dentro é quem você precisa lá fora.</p>
+          </article>
+          <article class="comm-card">
+            <span class="comm-card__icon" aria-hidden="true"><i class="ph ph-calendar-blank"></i></span>
+            <h3 class="comm-card__title">Eventos e encontros</h3>
+            <p class="comm-card__body">Mesas de empreendedorismo, workshops curtos, demoday de startup local. Calendário próprio, não convite genérico.</p>
+          </article>
+        </div>
+      </div>
+
+      <aside class="community__quote" aria-label="Resumo">
+        <p class="community__quote-text">
+          Networking que faz <em>diferença<br>no faturamento</em>.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- BASTIDORES -->
+  <section class="bastidores" id="bastidores" aria-label="Bastidores da obra">
+    <header class="bastidores__head">
+      <p class="bastidores__eyebrow">Bastidores</p>
+      <h2 class="bastidores__title">A casa <em>tomando forma</em></h2>
+      <p class="bastidores__lede">
+        Acompanhe a obra em Arapongas, capítulo por capítulo,<br>da marcenaria ao acabamento.
+      </p>
+    </header>
+
+    <div class="bastidores__grid">
+      <article class="video-card">
+        <span class="video-card__badge">
+          <span class="video-card__badge-dot" aria-hidden="true"></span>
+          Cap. 01
+        </span>
+        <button class="video-card__play" type="button" aria-label="Reproduzir capítulo 1">
+          <i class="ph-fill ph-play" aria-hidden="true"></i>
+        </button>
+        <div class="video-card__caption">
+          <h3 class="video-card__title">Marcenaria em andamento</h3>
+          <p class="video-card__meta">Out 2025 · 1min 24s</p>
+        </div>
+      </article>
+
+      <article class="video-card video-card--offset">
+        <span class="video-card__badge">Em breve</span>
+        <button class="video-card__play" type="button" aria-label="Reproduzir capítulo 2" disabled>
+          <i class="ph-fill ph-play" aria-hidden="true"></i>
+        </button>
+        <div class="video-card__caption">
+          <h3 class="video-card__title">Acabamento &amp; mobiliário</h3>
+          <p class="video-card__meta">Cap. 02 · Nov 2025</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq" aria-label="Perguntas frequentes">
+    <div class="faq__layout">
+      <header class="faq__head">
+        <p class="faq__eyebrow">FAQ</p>
+        <h2 class="faq__title"><em>Perguntas</em> que<br>sempre chegam.</h2>
+        <p class="faq__lede">Não achou a sua? <a href="https://wa.me/5543000000000" target="_blank" rel="noopener noreferrer">Chama no WhatsApp</a>.</p>
+      </header>
+
+      <div class="faq__list">
+        <details class="faq__item" open>
+          <summary>
+            <h3 class="faq__q">Quando a Momment abre?</h3>
+            <span class="faq__toggle" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__a">A inauguração está prevista pra 67 dias a partir de hoje. Inauguradores recebem aviso uma semana antes pra agendar visita guiada antes da abertura ao público.</p>
+        </details>
+
+        <details class="faq__item">
+          <summary>
+            <h3 class="faq__q">Tem fidelidade?</h3>
+            <span class="faq__toggle" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__a">Só no Plano Anual, e mesmo assim você troca fidelidade por preço — economiza R$ 1.200/ano. Day Use, Flex e Mensalista Premium são sem fidelidade nenhuma.</p>
+        </details>
+
+        <details class="faq__item">
+          <summary>
+            <h3 class="faq__q">Como é o pagamento?</h3>
+            <span class="faq__toggle" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__a">Pix, boleto ou cartão recorrente. Day Use é avulso, planos mensais cobram no dia da contratação, anual pode parcelar em 12x sem juros.</p>
+        </details>
+
+        <details class="faq__item">
+          <summary>
+            <h3 class="faq__q">Tem estacionamento?</h3>
+            <span class="faq__toggle" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__a">Sim. Vagas próprias rotativas pra mensalistas e bicicletário coberto. Se a vaga lotar, a quadra inteira tem zona azul.</p>
+        </details>
+
+        <details class="faq__item">
+          <summary>
+            <h3 class="faq__q">Qual o horário de funcionamento?</h3>
+            <span class="faq__toggle" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__a">Day Use: 8h às 20h. Flex Mensal e Premium: 7h às 22h, segunda a sexta. Acesso 24/7 pra Mensalista Premium e Anual mediante credenciamento.</p>
+        </details>
+
+        <details class="faq__item">
+          <summary>
+            <h3 class="faq__q">Posso usar a sala de reunião avulsa?</h3>
+            <span class="faq__toggle" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__a">Sim, reserva por hora pelo WhatsApp ou no app. Mensalistas têm horas inclusas; não-clientes pagam diária a partir de R$ 60/h.</p>
+        </details>
+
+        <details class="faq__item">
+          <summary>
+            <h3 class="faq__q">Como agendo uma visita?</h3>
+            <span class="faq__toggle" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__a">Manda mensagem no WhatsApp com o melhor dia e horário. A gente responde em até 1 hora útil e confirma. Visita guiada de 20 minutos, café no fim.</p>
+        </details>
+
+        <details class="faq__item">
+          <summary>
+            <h3 class="faq__q">Posso usar como endereço fiscal?</h3>
+            <span class="faq__toggle" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__a">Sim, disponível pra Mensalista Premium e Anual. Endereço comercial em Arapongas com recepção pra correspondência e pacotes.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta" id="cta-final" aria-label="Reserve seu lugar">
+    <p class="final-cta__eyebrow">Inauguração em breve</p>
+    <h2 class="final-cta__title">Seja um dos primeiros a entrar.</h2>
+    <p class="final-cta__lede">
+      Inauguradores travam o preço de pré-abertura, ganham 20% nos 3 primeiros meses e visita guiada antes da casa abrir pro público.
+    </p>
+    <p class="final-cta__urgency">
+      <i class="ph-fill ph-warning" aria-hidden="true"></i>
+      Restam <b>12 vagas</b> de inaugurador.
+    </p>
+    <div class="final-cta__actions">
+      <a href="https://wa.me/5543000000000?text=Quero%20ser%20inaugurador%20da%20Momment" class="final-cta__primary" target="_blank" rel="noopener noreferrer">
+        <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
+        Quero ser inaugurador
+      </a>
+      <a href="mailto:contato@momment.com.br?subject=Quero%20ser%20inaugurador" class="final-cta__secondary">
+        Mandar e-mail
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo" aria-label="Rodapé">
+  <div class="site-footer__main">
+    <div class="site-footer__brand">
+      <p class="site-footer__brand-desc">
+        Coworking premium em Arapongas. Sala, móvel, silêncio — feitos por quem é daqui.
+      </p>
+      <img class="site-footer__logo" src="assets/footer-logo-momment.svg" alt="Momment Coworking">
+    </div>
+
+    <div class="site-footer__right">
+      <nav class="site-footer__cols" aria-label="Navegação do rodapé">
+        <div class="site-footer__col">
+          <p class="site-footer__col-title">Navegação</p>
+          <a href="espacos-e-planos.html">Espaços</a>
+          <a href="espacos-e-planos.html#tabela-planos">Planos</a>
+          <a href="index.html#bastidores">Bastidores</a>
+          <a href="index.html#faq">FAQ</a>
+          <a href="#login">Área do Cliente</a>
+        </div>
+
+        <div class="site-footer__col">
+          <p class="site-footer__col-title">Contato</p>
+          <p class="site-footer__contact-item">
+            <i class="ph ph-map-pin-line" aria-hidden="true"></i>
+            <span>Rua das Araucárias, 000<br>Centro · Arapongas/PR</span>
+          </p>
+          <p class="site-footer__contact-item">
+            <i class="ph ph-phone" aria-hidden="true"></i>
+            <span>(43) 0000-0000</span>
+          </p>
+          <p class="site-footer__contact-item">
+            <i class="ph ph-envelope-simple" aria-hidden="true"></i>
+            <span>ola@momment.com.br</span>
+          </p>
+          <p class="site-footer__contact-item">
+            <i class="ph ph-clock" aria-hidden="true"></i>
+            <span>Seg–Sex · 7h–22h</span>
+          </p>
+        </div>
+
+        <div class="site-footer__col">
+          <p class="site-footer__col-title">A Casa</p>
+          <a href="sobre.html">Sobre nós</a>
+          <a href="index.html#pra-quem-e">Pra quem é</a>
+          <a href="index.html#comunidade">Comunidade</a>
+          <a href="contato.html">Contato</a>
+        </div>
+      </nav>
+
+      <div class="site-footer__divider" role="presentation"></div>
+
+      <div class="site-footer__social">
+        <p class="site-footer__social-label">Conecte-se com a Momment</p>
+        <div class="site-footer__social-icons">
+          <a href="https://instagram.com/momment.coworking" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="ph ph-instagram-logo" aria-hidden="true"></i>
+          </a>
+          <a href="https://facebook.com/momment.coworking" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <i class="ph ph-facebook-logo" aria-hidden="true"></i>
+          </a>
+          <a href="https://wa.me/5543000000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+          </a>
+          <a href="#top" class="site-footer__top" aria-label="Voltar ao topo" data-tooltip="Voltar ao topo">
+            <i class="ph ph-arrow-up" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <p class="site-footer__copy">
+      © 2026 Momment. Todos os direitos reservados. Arapongas/PR · CNPJ 00.000.000/0001-00
+    </p>
+    <div class="site-footer__legal">
+      <ul class="site-footer__legal-nav">
+        <li><a href="#privacidade">Política de privacidade</a></li>
+        <li><a href="#termos">Termos de uso</a></li>
+        <li><a href="#cookies">Cookies</a></li>
+      </ul>
+      <a href="https://ldnasa.com.br" target="_blank" rel="noopener noreferrer" aria-label="LDNA S/A — agência digital">
+        <img class="site-footer__legal-mark" src="assets/footer-ldna.svg" alt="LDNA S/A">
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/momment.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Preview phase — block search engine indexing while site is in client review.
+# When the production domain (momment.com.br) goes live, swap this for an
+# allow-all robots.txt + a real sitemap.xml.
+
+User-agent: *
+Disallow: /

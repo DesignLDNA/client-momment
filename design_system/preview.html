@@ -1,0 +1,1765 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Momment — Design System Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+:root {
+  /* Brand */
+  --coral-600:#E85A4A; --coral-500:#FF7262; --coral-100:#FFD9D2;
+  --lavender-500:#D7BAFD; --lavender-100:#EFE3FF;
+
+  /* Neutros quentes */
+  --ink:#101010; --ink-soft:#2A2522;
+  --stone-500:#BFB4AE; --stone-300:#D9D0CA; --stone-200:#E8DFD9;
+  --cream-200:#F5E7DF; --cream-100:#FFF6F2; --white:#FFFFFF;
+
+  /* Semânticos */
+  --success-500:#2F8F6B; --success-100:#DDEEE5;
+  --warning-500:#C9892B; --warning-100:#F8ECD3;
+  --error-500:#C0392B;   --error-100:#F6DAD4;
+  --info-500:#6B5BB3;    --info-100:var(--lavender-100);
+
+  --focus-ring:#FF7262;
+
+  /* Type */
+  --font-display:"Fraunces", Georgia, serif;
+  --font-sans:"Nunito", system-ui, sans-serif;
+
+  --fs-display:clamp(56px, 7vw, 88px);
+  --fs-h1:clamp(40px, 5vw, 60px);
+  --fs-h2:clamp(32px, 4vw, 44px);
+  --fs-h3:28px; --fs-h4:22px; --fs-h5:18px;
+  --fs-body-lg:18px; --fs-body:16px; --fs-caption:14px; --fs-label:13px;
+
+  --lh-tight:1.05; --lh-snug:1.2; --lh-body:1.7; --lh-ui:1.4;
+  --tracking-display:-0.02em; --tracking-tight:-0.01em; --tracking-wide:0.06em;
+
+  /* Spacing */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px;
+  --s-8:32px; --s-10:40px; --s-12:48px; --s-16:64px; --s-20:80px;
+  --s-24:96px; --s-32:128px;
+  --container:1200px; --container-narrow:720px; --gutter:var(--s-6);
+
+  /* Radius */
+  --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-2xl:24px; --r-full:9999px;
+
+  /* Shadows (coral-tinted) */
+  --shadow-sm:0 1px 2px rgba(255,114,98,.06), 0 1px 1px rgba(16,16,16,.04);
+  --shadow-md:0 4px 12px rgba(255,114,98,.08), 0 2px 4px rgba(16,16,16,.04);
+  --shadow-lg:0 12px 28px rgba(255,114,98,.10), 0 4px 10px rgba(16,16,16,.05);
+  --shadow-xl:0 24px 56px rgba(255,114,98,.12), 0 8px 18px rgba(16,16,16,.06);
+  --hairline:inset 0 0 0 1px var(--stone-200);
+
+  /* Motion */
+  --dur-fast:150ms; --dur-base:220ms; --dur-slow:320ms;
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --ease-in:cubic-bezier(.55,0,.6,1);
+  --ease-inout:cubic-bezier(.65,0,.35,1);
+}
+
+*,*::before,*::after { box-sizing:border-box; }
+html,body { margin:0; padding:0; }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink);
+  background: var(--cream-100);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3 { font-family: var(--font-display); font-weight:500;
+           letter-spacing:var(--tracking-display); line-height:var(--lh-tight); margin:0; }
+h4,h5,h6 { font-family: var(--font-display); font-weight:600; line-height:var(--lh-snug); margin:0; }
+p { margin:0; }
+
+.container { width:100%; max-width:var(--container); margin-inline:auto; padding-inline:var(--s-6); }
+.section { padding-block: 56px; }
+@media (min-width:768px) { .section { padding-block: 96px; } }
+
+/* HEADER ============================ */
+.brand-bar {
+  background: var(--ink);
+  color: var(--white);
+  padding: var(--s-12) 0;
+  position: relative;
+  overflow: hidden;
+}
+.brand-bar::before{
+  content:""; position:absolute; inset:0;
+  background-image: radial-gradient(circle at 80% 30%, rgba(215,186,253,.12), transparent 50%);
+  pointer-events:none;
+}
+.brand-bar .container { display:flex; align-items:center; justify-content:space-between; gap:var(--s-8); flex-wrap:wrap; position:relative; }
+.brand-bar img { height:48px; width:auto; }
+.brand-bar .meta { font-size:13px; letter-spacing:var(--tracking-wide); text-transform:uppercase; color: var(--stone-500); }
+.brand-bar .meta b { color: var(--coral-500); font-weight:600; }
+
+/* SECTION CHROME ==================== */
+.eyebrow {
+  font: 500 var(--fs-label)/1 var(--font-sans);
+  text-transform: uppercase; letter-spacing: var(--tracking-wide);
+  color: var(--coral-500);
+  display:inline-block; margin-bottom: var(--s-3);
+}
+.section-title { font-size: var(--fs-h2); margin-bottom: var(--s-2); }
+.section-sub { color: var(--ink-soft); font-size: var(--fs-body-lg); max-width: 60ch; margin-bottom: var(--s-10); }
+
+.divider { height:1px; background: var(--stone-200); margin: 0; }
+
+/* COLOR GRID ======================== */
+.swatch-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: var(--s-4); }
+.swatch { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--hairline);
+          overflow:hidden; transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+.swatch:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.swatch .chip { aspect-ratio: 5/3; }
+.swatch .meta { padding: var(--s-3) var(--s-4); }
+.swatch .name { font-weight:600; font-size:14px; }
+.swatch .hex { font-size:12px; color: var(--stone-500); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing:.02em; }
+.swatch .role { font-size:12px; color: var(--ink-soft); margin-top:2px; }
+
+.swatch--ring { box-shadow: inset 0 0 0 1px var(--stone-300); }
+
+/* TYPE SCALE ======================== */
+.type-row { display:grid; grid-template-columns: 120px 1fr; gap: var(--s-6); align-items: baseline;
+            padding: var(--s-5) 0; border-bottom: 1px solid var(--stone-200); }
+.type-row:last-child { border-bottom: none; }
+.type-tag { font-size:12px; color: var(--stone-500); font-family: ui-monospace, monospace; letter-spacing:.04em; }
+.type-display { font: 500 var(--fs-display)/var(--lh-tight) var(--font-display); letter-spacing: var(--tracking-display); }
+.type-h1 { font: 500 var(--fs-h1)/var(--lh-tight) var(--font-display); letter-spacing: var(--tracking-display); }
+.type-h2 { font: 500 var(--fs-h2)/var(--lh-tight) var(--font-display); letter-spacing: var(--tracking-display); }
+.type-h3 { font: 600 var(--fs-h3)/var(--lh-snug) var(--font-display); }
+.type-body-lg { font: 400 var(--fs-body-lg)/var(--lh-body) var(--font-sans); max-width: 60ch; }
+.type-body { font: 400 var(--fs-body)/var(--lh-body) var(--font-sans); max-width: 70ch; color: var(--ink-soft); }
+.type-caption { font: 500 var(--fs-caption)/1.5 var(--font-sans); color: var(--stone-500); }
+.type-label { font: 500 var(--fs-label)/1 var(--font-sans); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--coral-500); }
+
+/* BUTTONS =========================== */
+.btn { font: 500 16px/1 var(--font-sans); border-radius: var(--r-md);
+       padding: 14px 22px; display: inline-flex; align-items: center;
+       gap: var(--s-2); transition: transform var(--dur-base) var(--ease-out),
+       background-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out),
+       box-shadow var(--dur-base) var(--ease-out);
+       border:none; cursor:pointer; }
+.btn:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.btn:active { transform: translateY(1px); }
+.btn[disabled] { opacity: .5; pointer-events:none; }
+
+.btn--primary { background: var(--coral-500); color: var(--white); }
+.btn--primary:hover { background: var(--coral-600); }
+.btn--secondary { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.btn--secondary:hover { background: var(--ink); color: var(--white); }
+.btn--ghost { background: transparent; color: var(--ink); padding-inline: var(--s-3); }
+.btn--ghost:hover { background: var(--stone-200); }
+
+.btn--sm { font-size: 14px; padding: 10px 16px; }
+.btn--lg { font-size: 18px; padding: 18px 28px; }
+
+.row { display:flex; gap: var(--s-3); align-items:center; flex-wrap:wrap; }
+.col-stack { display:flex; flex-direction:column; gap: var(--s-4); }
+
+/* CARDS ============================= */
+.card-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-6); }
+@media (max-width: 900px) { .card-grid { grid-template-columns: 1fr; } }
+.card { padding: var(--s-6); }
+.card-default { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--hairline);
+                transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+.card-default:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.card-highlight { background: var(--cream-200); border-radius: var(--r-xl); box-shadow: var(--shadow-lg); position:relative; }
+.card-subtle { background: var(--cream-100); border-radius: var(--r-lg); box-shadow: inset 0 0 0 1px var(--cream-200); }
+.card-title { font-size: var(--fs-h4); margin-bottom: var(--s-2); }
+.card-meta { font-size: 13px; color: var(--stone-500); margin-bottom: var(--s-4); }
+.price { font: 500 44px/1 var(--font-display); letter-spacing: var(--tracking-display); display:flex; align-items: baseline; gap: var(--s-1); }
+.price small { font: 500 14px/1 var(--font-sans); color: var(--stone-500); }
+.feature-list { list-style:none; padding:0; margin: var(--s-4) 0; display:flex; flex-direction:column; gap: var(--s-2); }
+.feature-list li { font-size:14px; color:var(--ink-soft); padding-left: var(--s-5); position:relative; }
+.feature-list li::before { content:""; position:absolute; left:0; top:.6em; width:8px; height:8px; border-radius: var(--r-full); background: var(--coral-500); opacity:.7; }
+
+/* INPUTS ============================ */
+.input-group { display:flex; flex-direction:column; gap: var(--s-2); max-width: 380px; }
+.input-label { font: 500 13px/1 var(--font-sans); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--ink-soft); }
+.input { background: var(--white); border: 1px solid var(--stone-300);
+         border-radius: var(--r-md); padding: 12px 14px;
+         font: 400 16px/1.4 var(--font-sans); color: var(--ink);
+         transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); width:100%; }
+.input:hover { border-color: var(--stone-500); }
+.input:focus { border-color: var(--coral-500); outline: none; box-shadow: 0 0 0 3px var(--coral-100); }
+.input--error { border-color: var(--error-500); box-shadow: 0 0 0 3px var(--error-100); }
+.input[disabled] { background: var(--stone-200); color: var(--stone-500); cursor: not-allowed; }
+.input-help { font-size:13px; color: var(--stone-500); }
+.input-error { font-size:13px; color: var(--error-500); }
+
+/* BADGES ============================ */
+.badge { display:inline-flex; align-items:center; gap: var(--s-1); padding: 4px 10px; font-weight:600; white-space: nowrap; }
+.badge--meters { background: var(--cream-200); color: var(--ink); border-radius: var(--r-sm);
+                 font: 600 11px/1.4 var(--font-sans); text-transform: uppercase; letter-spacing: var(--tracking-wide); padding: 6px 8px; }
+.badge--best { background: var(--coral-500); color: var(--white); border-radius: var(--r-full); font-size: 12px; padding: 6px 12px; }
+.badge--soft { background: var(--lavender-100); color: var(--info-500); border-radius: var(--r-full); font-size: 12px; padding: 6px 12px; }
+
+/* SHADOWS DEMO ===================== */
+.shadow-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-6); }
+@media (max-width: 800px) { .shadow-grid { grid-template-columns: repeat(2, 1fr); } }
+.shadow-tile { background: var(--white); border-radius: var(--r-lg); aspect-ratio: 1.4/1;
+               display:flex; align-items:flex-end; padding: var(--s-4);
+               font: 600 13px/1 var(--font-sans); color: var(--ink-soft); }
+.s-hairline { box-shadow: var(--hairline); }
+.s-sm { box-shadow: var(--shadow-sm); }
+.s-md { box-shadow: var(--shadow-md); }
+.s-lg { box-shadow: var(--shadow-lg); }
+.s-xl { box-shadow: var(--shadow-xl); }
+
+/* RADIUS DEMO ====================== */
+.radius-grid { display:flex; gap: var(--s-5); flex-wrap:wrap; }
+.radius-tile { width:88px; height:88px; background: var(--cream-200); display:flex; align-items:center; justify-content:center;
+               font: 600 12px/1 var(--font-sans); color: var(--ink-soft); box-shadow: var(--hairline); }
+
+/* SPACING DEMO ===================== */
+.spacing-grid { display:flex; gap: var(--s-4); align-items:flex-end; flex-wrap:wrap; }
+.spacing-tile { display:flex; flex-direction:column; align-items:center; gap: var(--s-2); }
+.spacing-bar { background: var(--coral-100); border-radius: var(--r-sm); width:24px; }
+.spacing-tile span { font: 500 11px/1 var(--font-sans); color: var(--stone-500); font-family: ui-monospace, monospace; }
+
+/* DO/DONT =========================== */
+.dodont { display:grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); }
+@media (max-width: 800px) { .dodont { grid-template-columns: 1fr; } }
+.dodont-card { padding: var(--s-5); border-radius: var(--r-lg); }
+.do { background: var(--success-100); box-shadow: inset 0 0 0 1px rgba(47,143,107,.2); }
+.dont { background: var(--error-100); box-shadow: inset 0 0 0 1px rgba(192,57,43,.18); }
+.dodont-tag { font: 700 11px/1 var(--font-sans); text-transform: uppercase; letter-spacing: var(--tracking-wide); margin-bottom: var(--s-2); }
+.do .dodont-tag { color: var(--success-500); }
+.dont .dodont-tag { color: var(--error-500); }
+.dodont-card p { font-size: 14px; color: var(--ink-soft); }
+
+/* MOTION DEMO ====================== */
+.motion-row { display:flex; gap: var(--s-4); align-items:center; flex-wrap:wrap; }
+
+/* §14 motion: subsection title + grid of demo cards */
+.subsection-title { font: 600 22px/1.3 var(--font-display); color: var(--ink); margin: var(--s-8) 0 var(--s-3); letter-spacing: -0.01em; }
+.motion-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-5); }
+@media (max-width: 800px) { .motion-grid { grid-template-columns: 1fr; } }
+.motion-card { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--hairline);
+               padding: 0; overflow: hidden; cursor: default; transition: none; }
+.motion-card:hover { transform: none; box-shadow: var(--hairline); }
+.motion-demo { background: var(--cream-200); padding: var(--s-8) var(--s-5); display:flex; align-items:center; justify-content:center; min-height: 140px; }
+.motion-meta { padding: var(--s-3) var(--s-5); border-top: 1px solid rgba(16,16,16,0.06); display:flex; justify-content:space-between; align-items:baseline; gap: var(--s-3); }
+.motion-meta b { font: 600 14px/1 var(--font-display); color: var(--ink); }
+.motion-meta span { font: 500 12px/1.3 ui-monospace, monospace; color: var(--stone-500); text-align:right; }
+
+/* button hover demo */
+.motion-btn { transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out); }
+.motion-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.motion-btn:active { transform: translateY(1px); transition-duration: 120ms; }
+
+/* input focus demo */
+.motion-input { width: 100%; max-width: 280px; padding: var(--s-3) var(--s-4); border-radius: var(--r-md);
+                border: 1px solid rgba(16,16,16,0.12); background: var(--white); font: 400 14px/1 var(--font-sans);
+                color: var(--ink); outline: none;
+                transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out); }
+.motion-input:focus { border-color: var(--coral-500); box-shadow: 0 0 0 3px var(--coral-100); }
+
+/* card hover demo */
+.motion-card-hover { background: var(--white); padding: var(--s-4) var(--s-5); border-radius: var(--r-md);
+                     box-shadow: var(--hairline); cursor:pointer; min-width: 200px;
+                     transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out); }
+.motion-card-hover:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.motion-card-hover b { display:block; font: 600 14px/1.2 var(--font-display); color: var(--ink); }
+.motion-card-hover span { font: 400 13px/1.3 var(--font-sans); color: var(--stone-500); }
+
+/* list hover demo */
+.motion-list { list-style: none; padding: 0; margin: 0; background: var(--white); border-radius: var(--r-md);
+               box-shadow: var(--hairline); width: 100%; max-width: 320px; overflow:hidden; }
+.motion-list li { padding: var(--s-3) var(--s-4); font: 400 14px/1.4 var(--font-sans); color: var(--ink);
+                  cursor:pointer; transition: background-color 120ms var(--ease-out); }
+.motion-list li:hover { background: var(--cream-200); }
+.motion-list li + li { border-top: 1px solid rgba(16,16,16,0.06); }
+
+/* reveal demo */
+.reveal-demo { background: var(--cream-200); border-radius: var(--r-lg); padding: var(--s-6); position:relative; }
+.reveal-demo .btn { position:absolute; top: var(--s-4); right: var(--s-4); z-index: 2; }
+.reveal-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-3); margin-top: var(--s-8); }
+@media (max-width: 800px) { .reveal-grid { grid-template-columns: repeat(2, 1fr); } }
+.reveal-block { aspect-ratio: 1; background: var(--white); border-radius: var(--r-md); box-shadow: var(--hairline);
+                display:flex; align-items:center; justify-content:center; font: 500 13px/1 ui-monospace, monospace;
+                color: var(--stone-500);
+                opacity: 0; transform: translateY(16px);
+                transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out); }
+.reveal-block.is-visible { opacity: 1; transform: translateY(0); }
+
+/* text animation demo */
+.text-anim-demo { background: var(--cream-200); border-radius: var(--r-lg); padding: var(--s-10) var(--s-6); position:relative; }
+.text-anim-demo .btn { position:absolute; top: var(--s-4); right: var(--s-4); z-index: 2; }
+.text-anim-h1 { font: 500 clamp(32px, 5vw, 56px)/1.05 var(--font-display); color: var(--ink); letter-spacing: -0.02em; margin: 0; max-width: 16ch; }
+.text-anim-h1 span { display: inline-block; opacity: 0; transform: translateY(0.4em);
+                     animation: word-up 600ms var(--ease-out) forwards;
+                     animation-delay: calc(60ms * var(--word-i, 0)); }
+.text-anim-h1.replay span { animation: none; opacity: 0; transform: translateY(0.4em); }
+@keyframes word-up { to { opacity: 1; transform: translateY(0); } }
+
+/* webgl demo (CSS gradient fallback) */
+.webgl-row { display:grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+@media (max-width: 800px) { .webgl-row { grid-template-columns: 1fr; } }
+.webgl-demo { position:relative; border-radius: var(--r-xl); overflow:hidden; aspect-ratio: 16/10; min-height: 220px; background: #1A1430; }
+.webgl-demo .webgl-canvas { position:absolute; inset:0; width:100% !important; height:100% !important; display:block; }
+.webgl-fallback { position:absolute; inset:0;
+                  background: radial-gradient(120% 80% at 30% 20%, #5A4A8C 0%, #2D2348 60%, #1A1430 100%); }
+.webgl-bg-css { position:absolute; inset:0;
+                background: radial-gradient(120% 80% at 30% 20%, #5A4A8C 0%, #2D2348 60%, #1A1430 100%);
+                background-size: 200% 200%;
+                animation: hero-drift 24s ease-in-out infinite alternate; }
+@keyframes hero-drift { to { background-position: 60% 40%; } }
+.webgl-content { position:relative; z-index: 1; padding: var(--s-6); height:100%; display:flex; flex-direction:column; justify-content:flex-end; gap: var(--s-2); }
+.webgl-content h3 { font: 500 clamp(22px, 3vw, 36px)/1.05 var(--font-display); color: var(--white); letter-spacing: -0.02em; margin:0; max-width: 18ch; }
+.webgl-status { position:absolute; top: var(--s-3); right: var(--s-3); z-index: 2;
+                font: 500 11px/1 ui-monospace, monospace; color: rgba(255,255,255,0.6);
+                background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) { .webgl-bg-css { animation: none; } }
+
+/* anti-patterns list */
+.anti-list { display:grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+@media (max-width: 800px) { .anti-list { grid-template-columns: 1fr; } }
+.anti-item { display:flex; gap: var(--s-4); padding: var(--s-4) var(--s-5); background: var(--white); border-radius: var(--r-md); box-shadow: var(--hairline); }
+.anti-num { font: 700 14px/1 ui-monospace, monospace; color: var(--coral-500); flex-shrink:0; padding-top: 2px; }
+.anti-item p { font: 400 14px/1.55 var(--font-sans); color: var(--ink-soft); margin:0; }
+.anti-item p b { color: var(--ink); font-weight: 600; }
+.anti-item code { font: 500 12.5px/1 ui-monospace, monospace; background: var(--cream-200); padding: 1px 5px; border-radius: 4px; color: var(--ink); }
+
+/* MISC ============================= */
+.note { font: 400 14px/1.6 var(--font-sans); color: var(--ink-soft); padding: var(--s-4) var(--s-5);
+        background: var(--cream-200); border-left: 3px solid var(--coral-500); border-radius: var(--r-md);
+        max-width: 720px; }
+
+/* ICON GRID ======================== */
+.icon-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--s-3); }
+.icon-cell { display:flex; align-items:center; gap: var(--s-3); padding: var(--s-3) var(--s-4); background: var(--white);
+             border-radius: var(--r-md); box-shadow: var(--hairline); }
+.icon-cell i { font-size: 24px; color: var(--ink); flex-shrink:0; }
+.icon-cell b { display:block; font: 600 13px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--ink); }
+.icon-cell span { font: 400 12px/1.3 var(--font-sans); color: var(--stone-500); }
+
+/* PATTERNS ========================= */
+.pattern-grid { display:grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); }
+@media (max-width: 800px) { .pattern-grid { grid-template-columns: 1fr; } }
+.pattern-card { aspect-ratio: 3/2; border-radius: var(--r-lg); padding: var(--s-6); display:flex; flex-direction:column;
+                justify-content:space-between; box-shadow: var(--hairline); position:relative; overflow:hidden; }
+.pattern-noise {
+  background-color: var(--cream-100);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.063  0 0 0 0 0.063  0 0 0 0 0.063  0 0 0 0.20 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 240px 240px;
+}
+.pattern-blueprint {
+  background-color: var(--cream-100);
+  background-image:
+    linear-gradient(to right,  rgba(16,16,16,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16,16,16,0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.pattern-label b { display:block; font: 600 14px/1.2 ui-monospace, monospace; color: var(--ink); }
+.pattern-label span { font: 400 12px/1.3 var(--font-sans); color: var(--stone-500); }
+.pattern-meta { font: 400 13px/1.5 var(--font-sans); color: var(--ink-soft); max-width: 36ch; background: rgba(255,246,242,.85); padding: var(--s-2) var(--s-3); border-radius: var(--r-sm); }
+
+/* ILLUSTRATIONS ==================== */
+.illus-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-6); }
+@media (max-width: 800px) { .illus-grid { grid-template-columns: 1fr; } }
+.illus-card { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--hairline); padding: var(--s-5);
+              display:flex; flex-direction:column; gap: var(--s-3); aspect-ratio: 5/4; }
+.illus-card svg { flex:1; width:100%; height:auto; }
+.illus-label { font: 500 12px/1.3 var(--font-sans); color: var(--stone-500); }
+.illus-card.placeholder { background: var(--cream-200); align-items:center; justify-content:center; }
+.placeholder-text { font: 500 13px/1.4 ui-monospace, monospace; color: var(--ink-soft); text-align:center; flex:1; display:flex; align-items:center; justify-content:center; }
+
+/* PHOTO PLACEHOLDERS =============== */
+.photo-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); }
+@media (max-width: 900px) { .photo-grid { grid-template-columns: repeat(2, 1fr); } }
+.photo-card { background: var(--cream-200);
+              background-image: repeating-linear-gradient(135deg, transparent, transparent 16px, rgba(16,16,16,0.03) 16px, rgba(16,16,16,0.03) 17px);
+              border-radius: var(--r-xl); position:relative; box-shadow: var(--hairline);
+              height: 220px;
+              display:flex; align-items:flex-end; justify-content:space-between; padding: var(--s-4); }
+.photo-tag { font: 600 11px/1 ui-monospace, monospace; color: var(--stone-500); background: var(--white); padding: 4px 8px; border-radius: var(--r-sm); position:absolute; top: var(--s-3); left: var(--s-3); }
+.photo-name { font: 600 13px/1 var(--font-sans); color: var(--ink); }
+
+/* AI PROMPTS ====================== */
+.prompt-grid { display:grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+@media (max-width: 900px) { .prompt-grid { grid-template-columns: 1fr; } }
+.prompt-card { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--hairline); padding: var(--s-5); }
+.prompt-head { display:flex; align-items:baseline; justify-content:space-between; gap: var(--s-3); margin-bottom: var(--s-3); }
+.prompt-head b { font: 600 13px/1 ui-monospace, monospace; color: var(--coral-500); }
+.prompt-head { font: 600 16px/1.3 var(--font-display); color: var(--ink); }
+.prompt-head span { font: 500 11px/1 ui-monospace, monospace; color: var(--stone-500); background: var(--cream-200); padding: 4px 8px; border-radius: var(--r-sm); }
+.prompt-body { font: 400 14px/1.6 var(--font-sans); color: var(--ink-soft); margin-bottom: var(--s-3); }
+.prompt-params { display:block; font: 500 12px/1.4 ui-monospace, monospace; color: var(--ink); background: var(--cream-200);
+                 padding: var(--s-2) var(--s-3); border-radius: var(--r-sm); word-break: break-all; }
+
+footer { padding: var(--s-16) 0 var(--s-20); color: var(--stone-500); font-size: 13px; text-align:center; }
+footer a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--coral-500); text-underline-offset: 3px; }
+/* ===== §15-21 EXTENSIONS ===== */
+
+/* §15 a11y */
+.a11y-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6); }
+@media (max-width: 900px) { .a11y-grid { grid-template-columns: 1fr; } }
+.a11y-card { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--hairline); padding: var(--s-5); display:flex; flex-direction:column; gap: var(--s-3); }
+.a11y-card h4 { font: 600 16px/1.3 var(--font-sans); color: var(--ink); margin: 0; }
+.a11y-card p { font-size: 14px; color: var(--ink-soft); margin: 0; }
+.contrast-bar { display:grid; grid-template-columns: 1fr auto; align-items:center; gap: var(--s-3); padding: var(--s-3) var(--s-4); border-radius: var(--r-md); font-size: 14px; }
+.contrast-bar .ratio { font: 700 13px/1 ui-monospace, monospace; padding: 2px 8px; border-radius: var(--r-sm); background: rgba(255,255,255,0.7); color: var(--ink); }
+.contrast-bar.pass { background: var(--success-100); color: var(--ink); }
+.contrast-bar.fail { background: var(--error-100); color: var(--ink); }
+.focus-demo { display:flex; gap: var(--s-3); flex-wrap:wrap; padding: var(--s-4); background: var(--cream-200); border-radius: var(--r-md); }
+.focus-demo .btn:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.touch-grid { display:flex; gap: var(--s-3); align-items:flex-end; padding: var(--s-4); background: var(--cream-200); border-radius: var(--r-md); }
+.touch-cell { display:flex; align-items:center; justify-content:center; background: var(--coral-500); color: var(--white); border-radius: var(--r-md); font: 600 12px/1 var(--font-sans); }
+.touch-cell.bad { background: var(--error-500); width: 32px; height: 32px; }
+.touch-cell.good { background: var(--success-500); width: 44px; height: 44px; }
+
+/* §16 responsive */
+.bp-strip { display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-3); margin-top: var(--s-4); }
+@media (max-width: 800px) { .bp-strip { grid-template-columns: repeat(2, 1fr); } }
+.bp-tile { background: var(--white); border-radius: var(--r-md); box-shadow: var(--hairline); padding: var(--s-4); display:flex; flex-direction:column; gap: var(--s-1); }
+.bp-tile .bp-px { font: 700 24px/1 var(--font-display); color: var(--ink); letter-spacing: -0.01em; }
+.bp-tile .bp-name { font: 500 12px/1 var(--font-sans); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--coral-500); }
+.bp-tile .bp-use { font-size: 13px; color: var(--ink-soft); margin-top: var(--s-2); }
+.layout-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: var(--s-4); background: var(--white); border-radius: var(--r-lg); overflow:hidden; box-shadow: var(--hairline); }
+.layout-table th, .layout-table td { padding: var(--s-3) var(--s-4); text-align: left; border-bottom: 1px solid var(--stone-200); }
+.layout-table th { background: var(--cream-200); font: 600 12px/1 var(--font-sans); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--ink-soft); }
+.layout-table tr:last-child td { border-bottom: none; }
+.layout-table td:first-child { font-weight: 600; color: var(--ink); }
+.layout-table code { font: 500 12px/1.4 ui-monospace, monospace; color: var(--coral-600); background: var(--cream-100); padding: 2px 6px; border-radius: 4px; }
+
+/* §17 microcopy */
+.copy-table { display:grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--stone-200); border-radius: var(--r-lg); overflow:hidden; box-shadow: var(--hairline); margin-top: var(--s-4); }
+.copy-table .ch { background: var(--cream-200); padding: var(--s-3) var(--s-4); font: 600 11px/1 var(--font-sans); text-transform: uppercase; letter-spacing: var(--tracking-wide); }
+.copy-table .ch.yes { color: var(--success-500); }
+.copy-table .ch.no { color: var(--error-500); }
+.copy-table .cell { background: var(--white); padding: var(--s-4); font-size: 15px; line-height: 1.45; color: var(--ink); }
+.copy-table .cell.no { color: var(--stone-500); text-decoration: line-through; text-decoration-color: rgba(192,57,43,0.4); }
+.banned-list { display:flex; flex-wrap:wrap; gap: var(--s-2); margin-top: var(--s-4); }
+.banned-tag { display:inline-flex; align-items:center; gap: var(--s-1); padding: 6px 12px; background: var(--white); border-radius: var(--r-full); box-shadow: inset 0 0 0 1px var(--stone-300); font: 500 13px/1 var(--font-sans); color: var(--ink-soft); text-decoration: line-through; text-decoration-color: var(--error-500); text-decoration-thickness: 2px; }
+
+/* §18 states */
+.state-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+@media (max-width: 900px) { .state-grid { grid-template-columns: 1fr; } }
+.state-card { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--hairline); padding: var(--s-5); display:flex; flex-direction:column; gap: var(--s-3); }
+.state-card .state-label { font: 600 11px/1 var(--font-sans); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--coral-500); }
+.skeleton-line { background: linear-gradient(90deg, var(--cream-200) 0%, rgba(245,231,223,0.5) 50%, var(--cream-200) 100%); background-size: 200% 100%; animation: skel-shim 1.4s ease-in-out infinite; border-radius: var(--r-sm); height: 12px; }
+.skeleton-line.title { height: 18px; width: 70%; }
+.skeleton-line.body { height: 12px; }
+.skeleton-line.body.short { width: 60%; }
+@keyframes skel-shim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton-line { animation: none; } }
+.empty-state { display:flex; flex-direction:column; align-items:center; gap: var(--s-3); padding: var(--s-6) var(--s-4); text-align:center; }
+.empty-state i { font-size: 48px; color: var(--stone-500); }
+.empty-state p { font-size: 14px; color: var(--ink-soft); margin: 0; }
+.error-state { display:flex; gap: var(--s-3); align-items:flex-start; padding: var(--s-4); background: var(--error-100); border-radius: var(--r-md); border-left: 3px solid var(--error-500); }
+.error-state i { font-size: 20px; color: var(--error-500); flex-shrink:0; padding-top: 2px; }
+.error-state p { font-size: 14px; color: var(--ink); margin: 0 0 var(--s-2); }
+.toast-demo { display:flex; gap: var(--s-3); align-items:center; padding: var(--s-3) var(--s-4); background: var(--white); border-radius: var(--r-md); box-shadow: var(--shadow-md); border-left: 3px solid var(--success-500); }
+.toast-demo i { font-size: 20px; color: var(--success-500); flex-shrink:0; }
+.toast-demo p { font-size: 13px; color: var(--ink); margin: 0; line-height: 1.4; }
+.disabled-demo { display:flex; flex-direction:column; gap: var(--s-2); }
+.disabled-demo .helper { font-size: 12px; color: var(--stone-500); }
+
+/* §19 perf */
+.perf-table { width:100%; border-collapse: collapse; background: var(--white); border-radius: var(--r-lg); overflow:hidden; box-shadow: var(--hairline); margin-top: var(--s-4); }
+.perf-table th, .perf-table td { padding: var(--s-3) var(--s-4); text-align:left; border-bottom: 1px solid var(--stone-200); font-size: 14px; }
+.perf-table th { background: var(--cream-200); font: 600 12px/1 var(--font-sans); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--ink-soft); }
+.perf-table tr:last-child td { border-bottom: none; }
+.perf-table td:first-child { font-weight: 600; color: var(--ink); }
+.perf-table .budget { font: 600 13px/1 ui-monospace, monospace; color: var(--coral-600); }
+.cwv-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); margin-top: var(--s-4); }
+@media (max-width: 800px) { .cwv-grid { grid-template-columns: 1fr; } }
+.cwv-card { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--hairline); padding: var(--s-5); }
+.cwv-card .cwv-name { font: 700 11px/1 ui-monospace, monospace; color: var(--coral-500); letter-spacing: 0.06em; }
+.cwv-card .cwv-target { font: 500 32px/1 var(--font-display); color: var(--ink); margin: var(--s-2) 0 var(--s-1); letter-spacing: -0.02em; }
+.cwv-card .cwv-desc { font-size: 13px; color: var(--ink-soft); }
+
+/* §20 SEO */
+.seo-block { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--hairline); padding: var(--s-5); margin-top: var(--s-4); }
+.seo-block code { display:block; font: 500 13px/1.6 ui-monospace, monospace; background: var(--cream-100); border-radius: var(--r-md); padding: var(--s-3) var(--s-4); color: var(--ink); white-space: pre-wrap; word-break: break-word; }
+.serp-preview { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--hairline); padding: var(--s-5); max-width: 600px; }
+.serp-url { font: 400 13px/1.4 var(--font-sans); color: #5f6368; }
+.serp-title { font: 500 20px/1.3 var(--font-sans); color: #1a0dab; margin: 4px 0 6px; }
+.serp-desc { font: 400 14px/1.5 var(--font-sans); color: #4d5156; }
+.url-list { display:flex; flex-direction:column; gap: var(--s-2); margin-top: var(--s-4); }
+.url-row { display:grid; grid-template-columns: 200px 1fr; gap: var(--s-4); padding: var(--s-3) var(--s-4); background: var(--white); border-radius: var(--r-md); box-shadow: var(--hairline); font-size: 14px; align-items:center; }
+.url-row code { font: 500 13px/1 ui-monospace, monospace; color: var(--coral-600); }
+
+/* §21 checklist */
+.check-list { display:grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); margin-top: var(--s-4); }
+@media (max-width: 800px) { .check-list { grid-template-columns: 1fr; } }
+.check-item { display:flex; gap: var(--s-3); padding: var(--s-4) var(--s-5); background: var(--white); border-radius: var(--r-md); box-shadow: var(--hairline); align-items:flex-start; }
+.check-item i { font-size: 20px; color: var(--success-500); flex-shrink:0; padding-top: 1px; }
+.check-item p { font-size: 14px; color: var(--ink); margin: 0; line-height: 1.45; }
+
+</style>
+</head>
+<body>
+
+<header class="brand-bar">
+  <div class="container">
+    <img src="assets/logo-horizontal-branca.svg" alt="Momment" />
+    <div class="meta">Design System · v<b>1.0</b> · Apr 2026</div>
+  </div>
+</header>
+
+<!-- 1. PALETA ========================================================= -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">01 · Cores</span>
+    <h2 class="section-title">Paleta</h2>
+    <p class="section-sub">Coral é gesto. Lavender é decoração. Cream é o palco. Branco puro é só superfície interna.</p>
+
+    <h4 style="margin-bottom:var(--s-4); font-size:14px; text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--stone-500);">Marca</h4>
+    <div class="swatch-grid" style="margin-bottom: var(--s-10);">
+      <div class="swatch"><div class="chip" style="background:var(--coral-500)"></div><div class="meta"><div class="name">Coral 500</div><div class="hex">#FF7262</div><div class="role">CTA, ênfase, badge</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--coral-600)"></div><div class="meta"><div class="name">Coral 600</div><div class="hex">#E85A4A</div><div class="role">Hover/pressed</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--coral-100)"></div><div class="meta"><div class="name">Coral 100</div><div class="hex">#FFD9D2</div><div class="role">Tint, focus ring</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--lavender-500)"></div><div class="meta"><div class="name">Lavender 500</div><div class="hex">#D7BAFD</div><div class="role">Acento decorativo</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--lavender-100)"></div><div class="meta"><div class="name">Lavender 100</div><div class="hex">#EFE3FF</div><div class="role">Chip soft, info</div></div></div>
+    </div>
+
+    <h4 style="margin-bottom:var(--s-4); font-size:14px; text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--stone-500);">Neutros (palco)</h4>
+    <div class="swatch-grid" style="margin-bottom: var(--s-10);">
+      <div class="swatch"><div class="chip" style="background:var(--ink)"></div><div class="meta"><div class="name">Ink</div><div class="hex">#101010</div><div class="role">Texto, headings</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--ink-soft)"></div><div class="meta"><div class="name">Ink Soft</div><div class="hex">#2A2522</div><div class="role">Texto secundário</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--stone-500)"></div><div class="meta"><div class="name">Stone 500</div><div class="hex">#BFB4AE</div><div class="role">Terciário</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--stone-300)"></div><div class="meta"><div class="name">Stone 300</div><div class="hex">#D9D0CA</div><div class="role">Border default</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--stone-200)"></div><div class="meta"><div class="name">Stone 200</div><div class="hex">#E8DFD9</div><div class="role">Border subtle</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--cream-200)"></div><div class="meta"><div class="name">Cream 200</div><div class="hex">#F5E7DF</div><div class="role">Surface destacada</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--cream-100)"></div><div class="meta"><div class="name">Cream 100</div><div class="hex">#FFF6F2</div><div class="role">BG da página</div></div></div>
+      <div class="swatch swatch--ring"><div class="chip" style="background:var(--white)"></div><div class="meta"><div class="name">White</div><div class="hex">#FFFFFF</div><div class="role">Card, input</div></div></div>
+    </div>
+
+    <h4 style="margin-bottom:var(--s-4); font-size:14px; text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--stone-500);">Semânticos</h4>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:var(--success-500)"></div><div class="meta"><div class="name">Success</div><div class="hex">#2F8F6B</div><div class="role">Confirmações</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--warning-500)"></div><div class="meta"><div class="name">Warning</div><div class="hex">#C9892B</div><div class="role">Alertas</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--error-500)"></div><div class="meta"><div class="name">Error</div><div class="hex">#C0392B</div><div class="role">Erros, destrutivo</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--info-500)"></div><div class="meta"><div class="name">Info</div><div class="hex">#6B5BB3</div><div class="role">Informativo</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 2. TIPOGRAFIA =================================================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">02 · Tipografia</span>
+    <h2 class="section-title">Escala</h2>
+    <p class="section-sub">Marca: <b>The Seasons</b> (display) + <b>All Round Gothic</b> (sans). Preview usa fallbacks Google: Fraunces + Nunito.</p>
+
+    <div class="type-row">
+      <span class="type-tag">display · 88</span>
+      <div class="type-display">Trabalhe num lugar à altura.</div>
+    </div>
+    <div class="type-row">
+      <span class="type-tag">h1 · 60</span>
+      <div class="type-h1">O maior coworking de Arapongas.</div>
+    </div>
+    <div class="type-row">
+      <span class="type-tag">h2 · 44</span>
+      <div class="type-h2">Comunidade Momment</div>
+    </div>
+    <div class="type-row">
+      <span class="type-tag">h3 · 28</span>
+      <div class="type-h3">Sala Privativa para 4 pessoas</div>
+    </div>
+    <div class="type-row">
+      <span class="type-tag">body lg · 18</span>
+      <div class="type-body-lg">Cadeiras ergonômicas reais, mesas amplas, ambiente silencioso. Móveis feitos na cidade do móvel — pra você sentir a diferença antes de assinar.</div>
+    </div>
+    <div class="type-row">
+      <span class="type-tag">body · 16</span>
+      <div class="type-body">Espaço pensado para advogados, contadores, arquitetos e pequenas empresas que querem profissionalismo de capital sem sair da região. Linha de leitura larga, line-height 1.7, ar de revista impressa.</div>
+    </div>
+    <div class="type-row">
+      <span class="type-tag">caption · 14</span>
+      <div class="type-caption">Cadeiras Flexform · iluminação 4000K · acústica tratada</div>
+    </div>
+    <div class="type-row">
+      <span class="type-tag">label · 13</span>
+      <div class="type-label">PRÉ-INAUGURAÇÃO</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 3. ESPAÇAMENTO ================================================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">03 · Espaçamento</span>
+    <h2 class="section-title">Sistema 4 px</h2>
+    <p class="section-sub">Tokens numéricos. Container 1200 px. Seções respiram 56 mobile / 96 desktop.</p>
+
+    <div class="spacing-grid">
+      <div class="spacing-tile"><div class="spacing-bar" style="height:4px"></div><span>s-1 · 4</span></div>
+      <div class="spacing-tile"><div class="spacing-bar" style="height:8px"></div><span>s-2 · 8</span></div>
+      <div class="spacing-tile"><div class="spacing-bar" style="height:12px"></div><span>s-3 · 12</span></div>
+      <div class="spacing-tile"><div class="spacing-bar" style="height:16px"></div><span>s-4 · 16</span></div>
+      <div class="spacing-tile"><div class="spacing-bar" style="height:24px"></div><span>s-6 · 24</span></div>
+      <div class="spacing-tile"><div class="spacing-bar" style="height:32px"></div><span>s-8 · 32</span></div>
+      <div class="spacing-tile"><div class="spacing-bar" style="height:48px"></div><span>s-12 · 48</span></div>
+      <div class="spacing-tile"><div class="spacing-bar" style="height:64px"></div><span>s-16 · 64</span></div>
+      <div class="spacing-tile"><div class="spacing-bar" style="height:80px"></div><span>s-20 · 80</span></div>
+      <div class="spacing-tile"><div class="spacing-bar" style="height:96px"></div><span>s-24 · 96</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 4. RADIUS ======================================================= -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">04 · Border radius</span>
+    <h2 class="section-title">Raio segue massa</h2>
+    <p class="section-sub">Peça pequena = raio pequeno. Botão e input sempre iguais (8 px). Imagens grandes em xl.</p>
+
+    <div class="radius-grid">
+      <div class="radius-tile" style="border-radius: var(--r-sm)">sm · 4</div>
+      <div class="radius-tile" style="border-radius: var(--r-md)">md · 8</div>
+      <div class="radius-tile" style="border-radius: var(--r-lg)">lg · 12</div>
+      <div class="radius-tile" style="border-radius: var(--r-xl)">xl · 16</div>
+      <div class="radius-tile" style="border-radius: var(--r-2xl)">2xl · 24</div>
+      <div class="radius-tile" style="border-radius: var(--r-full)">full</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 5. SOMBRAS ====================================================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">05 · Elevação</span>
+    <h2 class="section-title">Sombras com tinta de coral</h2>
+    <p class="section-sub">Nunca sombra preta pura. Cada elevação carrega 6–12 % de coral pra simular luz quente caindo em madeira.</p>
+
+    <div class="shadow-grid">
+      <div class="shadow-tile s-hairline">hairline</div>
+      <div class="shadow-tile s-sm">shadow-sm</div>
+      <div class="shadow-tile s-md">shadow-md</div>
+      <div class="shadow-tile s-lg">shadow-lg</div>
+    </div>
+    <div style="height: var(--s-6)"></div>
+    <div class="shadow-grid" style="grid-template-columns: 1fr;">
+      <div class="shadow-tile s-xl" style="aspect-ratio:auto; height:160px;">shadow-xl · usado em modais</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 6. BOTÕES ======================================================= -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">06 · Componentes</span>
+    <h2 class="section-title">Botões</h2>
+    <p class="section-sub">Três variantes. Três tamanhos. Foco-visível obrigatório. Sem sombra em botão.</p>
+
+    <div class="col-stack" style="gap: var(--s-8);">
+      <div>
+        <div class="type-tag" style="margin-bottom: var(--s-3)">primary</div>
+        <div class="row">
+          <button class="btn btn--primary btn--lg">Falar no WhatsApp →</button>
+          <button class="btn btn--primary">Reservar visita</button>
+          <button class="btn btn--primary btn--sm">Ver planos</button>
+          <button class="btn btn--primary" disabled>Indisponível</button>
+        </div>
+      </div>
+      <div>
+        <div class="type-tag" style="margin-bottom: var(--s-3)">secondary</div>
+        <div class="row">
+          <button class="btn btn--secondary btn--lg">Ver as salas</button>
+          <button class="btn btn--secondary">Baixar tabela</button>
+          <button class="btn btn--secondary btn--sm">Mais detalhes</button>
+        </div>
+      </div>
+      <div>
+        <div class="type-tag" style="margin-bottom: var(--s-3)">ghost</div>
+        <div class="row">
+          <button class="btn btn--ghost btn--lg">Voltar ao topo</button>
+          <button class="btn btn--ghost">Ver no mapa</button>
+          <button class="btn btn--ghost btn--sm">FAQ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 7. CARDS ======================================================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">07 · Componentes</span>
+    <h2 class="section-title">Cards · planos</h2>
+    <p class="section-sub">Default = white + hairline. Highlight = cream-200 + shadow-lg + radius-xl (Plano Anual apenas). Subtle = cream-100, p/ FAQ e callouts.</p>
+
+    <div class="card-grid">
+      <article class="card card-default">
+        <span class="badge badge--meters">Mensal</span>
+        <h3 class="card-title" style="margin-top: var(--s-3)">Estação Compartilhada</h3>
+        <p class="card-meta">Dia inteiro · café incluso</p>
+        <div class="price">R$ 590<small>/mês</small></div>
+        <ul class="feature-list">
+          <li>Mesa fixa, 8h/dia</li>
+          <li>Internet 1 Gbps redundante</li>
+          <li>Sala de reunião 4h/mês</li>
+        </ul>
+        <button class="btn btn--secondary" style="width:100%; justify-content:center;">Ver detalhes</button>
+      </article>
+
+      <article class="card card-highlight">
+        <span class="badge badge--best" style="position:absolute; top:-12px; left:var(--s-6)">Melhor valor</span>
+        <span class="badge badge--meters">Anual</span>
+        <h3 class="card-title" style="margin-top: var(--s-3)">Plano Anual</h3>
+        <p class="card-meta">12 meses · economize 2 mensalidades</p>
+        <div class="price">R$ 490<small>/mês</small></div>
+        <ul class="feature-list">
+          <li>Mesa fixa, acesso 24/7</li>
+          <li>Internet 1 Gbps redundante</li>
+          <li>Sala de reunião 12h/mês</li>
+          <li>Endereço fiscal incluso</li>
+        </ul>
+        <button class="btn btn--primary" style="width:100%; justify-content:center;">Falar no WhatsApp</button>
+      </article>
+
+      <article class="card card-default">
+        <span class="badge badge--soft">Privativa</span>
+        <h3 class="card-title" style="margin-top: var(--s-3)">Sala 4 lugares</h3>
+        <p class="card-meta">16 m² · isolamento acústico</p>
+        <div class="price">R$ 2.890<small>/mês</small></div>
+        <ul class="feature-list">
+          <li>Sala dedicada para sua equipe</li>
+          <li>Mobília de Arapongas, sob medida</li>
+          <li>Acesso 24/7</li>
+        </ul>
+        <button class="btn btn--secondary" style="width:100%; justify-content:center;">Agendar visita</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 8. INPUTS + BADGES ============================================= -->
+<section class="section">
+  <div class="container">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--s-12);">
+      <div>
+        <span class="eyebrow">08 · Inputs</span>
+        <h2 class="section-title" style="font-size: var(--fs-h3); margin-bottom: var(--s-6)">Estados</h2>
+        <div class="col-stack">
+          <div class="input-group">
+            <label class="input-label">Nome</label>
+            <input class="input" placeholder="Como devemos te chamar?" />
+            <span class="input-help">Usamos pra organizar a agenda da visita.</span>
+          </div>
+          <div class="input-group">
+            <label class="input-label">WhatsApp</label>
+            <input class="input" value="(43) 9 9999-0000" />
+          </div>
+          <div class="input-group">
+            <label class="input-label">E-mail</label>
+            <input class="input input--error" value="email@invalido" />
+            <span class="input-error">Formato inválido. Confira o domínio.</span>
+          </div>
+          <div class="input-group">
+            <label class="input-label">CNPJ</label>
+            <input class="input" value="—" disabled />
+            <span class="input-help">Disponível após confirmar plano.</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">09 · Badges</span>
+        <h2 class="section-title" style="font-size: var(--fs-h3); margin-bottom: var(--s-6)">Variações</h2>
+        <div class="col-stack" style="gap: var(--s-4);">
+          <div class="row"><span class="badge badge--meters">12 m²</span><span class="badge badge--meters">16 m²</span><span class="badge badge--meters">24 m²</span></div>
+          <div class="row"><span class="badge badge--best">Melhor valor</span><span class="badge badge--best">Mais procurado</span></div>
+          <div class="row"><span class="badge badge--soft">Privativa</span><span class="badge badge--soft">Reunião</span><span class="badge badge--soft">Foco</span></div>
+        </div>
+        <div class="note" style="margin-top: var(--s-8);">
+          <b>Regra:</b> badge "Melhor valor" usa coral preenchido e nasce no Plano Anual. Não replicar em outros cards.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 10. ICONS ====================================================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">10 · Iconografia</span>
+    <h2 class="section-title">Phosphor regular · stroke 1.5</h2>
+    <p class="section-sub">Uma biblioteca, um peso. Cantos suaves, mesmo DNA do logotipo. <code>fill</code> só em estado ativo.</p>
+
+    <h4 style="margin-bottom:var(--s-4); font-size:14px; text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--stone-500);">Tamanhos</h4>
+    <div class="row" style="gap: var(--s-8); margin-bottom: var(--s-10); align-items:flex-end;">
+      <div class="col-stack" style="gap:8px; align-items:center;"><i class="ph ph-armchair" style="font-size:16px; color:var(--ink)"></i><span class="type-tag">sm · 16</span></div>
+      <div class="col-stack" style="gap:8px; align-items:center;"><i class="ph ph-armchair" style="font-size:20px; color:var(--ink)"></i><span class="type-tag">md · 20</span></div>
+      <div class="col-stack" style="gap:8px; align-items:center;"><i class="ph ph-armchair" style="font-size:24px; color:var(--ink)"></i><span class="type-tag">lg · 24</span></div>
+      <div class="col-stack" style="gap:8px; align-items:center;"><i class="ph ph-armchair" style="font-size:32px; color:var(--ink)"></i><span class="type-tag">xl · 32</span></div>
+    </div>
+
+    <h4 style="margin-bottom:var(--s-4); font-size:14px; text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--stone-500);">Mapa canônico</h4>
+    <div class="icon-grid">
+      <div class="icon-cell"><i class="ph ph-whatsapp-logo"></i><div><b>whatsapp-logo</b><span>WhatsApp · CTA primary</span></div></div>
+      <div class="icon-cell"><i class="ph ph-envelope-simple"></i><div><b>envelope-simple</b><span>E-mail</span></div></div>
+      <div class="icon-cell"><i class="ph ph-phone"></i><div><b>phone</b><span>Telefone</span></div></div>
+      <div class="icon-cell"><i class="ph ph-map-pin"></i><div><b>map-pin</b><span>Endereço</span></div></div>
+      <div class="icon-cell"><i class="ph ph-coffee"></i><div><b>coffee</b><span>Café / copa</span></div></div>
+      <div class="icon-cell"><i class="ph ph-armchair"></i><div><b>armchair</b><span>Móvel / cadeira</span></div></div>
+      <div class="icon-cell"><i class="ph ph-desk"></i><div><b>desk</b><span>Mesa de trabalho</span></div></div>
+      <div class="icon-cell"><i class="ph ph-users-three"></i><div><b>users-three</b><span>Comunidade</span></div></div>
+      <div class="icon-cell"><i class="ph ph-calendar-blank"></i><div><b>calendar-blank</b><span>Agenda</span></div></div>
+      <div class="icon-cell"><i class="ph ph-check"></i><div><b>check</b><span>Feature list</span></div></div>
+      <div class="icon-cell"><i class="ph ph-door"></i><div><b>door</b><span>Sala privativa</span></div></div>
+      <div class="icon-cell"><i class="ph ph-wifi-high"></i><div><b>wifi-high</b><span>Internet</span></div></div>
+      <div class="icon-cell"><i class="ph ph-car"></i><div><b>car</b><span>Estacionamento</span></div></div>
+      <div class="icon-cell"><i class="ph ph-clock-clockwise"></i><div><b>clock-clockwise</b><span>Acesso 24/7</span></div></div>
+      <div class="icon-cell"><i class="ph ph-speaker-slash"></i><div><b>speaker-slash</b><span>Acústica</span></div></div>
+      <div class="icon-cell"><i class="ph ph-calendar-check"></i><div><b>calendar-check</b><span>Reserva</span></div></div>
+      <div class="icon-cell"><i class="ph ph-wind"></i><div><b>wind</b><span>Clima</span></div></div>
+      <div class="icon-cell"><i class="ph ph-printer"></i><div><b>printer</b><span>Impressora</span></div></div>
+      <div class="icon-cell"><i class="ph ph-arrow-right"></i><div><b>arrow-right</b><span>CTA / link</span></div></div>
+      <div class="icon-cell"><i class="ph ph-arrow-left"></i><div><b>arrow-left</b><span>Voltar</span></div></div>
+      <div class="icon-cell"><i class="ph ph-caret-right"></i><div><b>caret-right</b><span>Carrossel</span></div></div>
+      <div class="icon-cell"><i class="ph ph-x"></i><div><b>x</b><span>Fechar</span></div></div>
+    </div>
+
+    <div class="note" style="margin-top: var(--s-8);">
+      <b>Regra:</b> nunca misturar bibliotecas. Sem emoji. Cor herda <code>currentColor</code> — coral só em ícones de ação (WhatsApp CTA, check em card destacado).
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 12. ELEMENTOS GRÁFICOS ========================================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">11 · Elementos gráficos</span>
+    <h2 class="section-title">Patterns, ilustração, foto</h2>
+    <p class="section-sub">Três camadas com função clara. Não são intercambiáveis. Mais que dois patterns vira tecido de sofá ruim.</p>
+
+    <h4 style="margin-bottom:var(--s-4); font-size:14px; text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--stone-500);">12.1 · Patterns</h4>
+    <div class="pattern-grid" style="margin-bottom: var(--s-10);">
+      <div class="pattern-card pattern-noise">
+        <div class="pattern-label"><b>noise-warm</b><span>5% alpha · tile 240 · fixed</span></div>
+        <div class="pattern-meta">BG padráo do body sobre cream-100. Imperceptivelmente presente — tira o achatamento de flat color.</div>
+      </div>
+      <div class="pattern-card pattern-blueprint">
+        <div class="pattern-label"><b>grid-tecnico</b><span>linhas 24px @ 4% ink</span></div>
+        <div class="pattern-meta">Máximo uma seção por página ("Como funciona", "Planta do espaço"). Esconder em mobile.</div>
+      </div>
+    </div>
+
+    <h4 style="margin-bottom:var(--s-4); font-size:14px; text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--stone-500);">12.2 · Ilustração</h4>
+    <div class="illus-grid" style="margin-bottom: var(--s-10);">
+      <div class="illus-card">
+        <svg viewBox="0 0 200 160" fill="none" stroke="#101010" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="40" width="140" height="90" rx="4"/>
+          <line x1="30" y1="60" x2="170" y2="60"/>
+          <circle cx="42" cy="50" r="2"/><circle cx="52" cy="50" r="2"/><circle cx="62" cy="50" r="2"/>
+          <rect x="50" y="75" width="100" height="40" rx="2"/>
+          <line x1="60" y1="95" x2="140" y2="95"/>
+          <circle cx="160" cy="50" r="2.5" fill="#FF7262" stroke="none"/>
+        </svg>
+        <div class="illus-label">Linha 1.5 + 1 acento coral</div>
+      </div>
+      <div class="illus-card">
+        <svg viewBox="0 0 200 160" fill="none" stroke="#101010" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M40 130 L40 80 Q40 65 55 65 L80 65 Q95 65 95 80 L95 130"/>
+          <line x1="35" y1="130" x2="100" y2="130"/>
+          <path d="M120 130 L120 70 L160 70 L160 130"/>
+          <line x1="115" y1="130" x2="165" y2="130"/>
+          <circle cx="140" cy="50" r="3" fill="#FF7262" stroke="none"/>
+        </svg>
+        <div class="illus-label">Mesmo peso do ícone Phosphor</div>
+      </div>
+      <div class="illus-card placeholder">
+        <div class="placeholder-text">ilustração:<br/>cenário 3</div>
+        <div class="illus-label">Placeholder honesto &gt; IA ruim</div>
+      </div>
+    </div>
+
+    <h4 style="margin-bottom:var(--s-4); font-size:14px; text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--stone-500);">12.3 · Fotografia</h4>
+    <div class="photo-grid">
+      <div class="photo-card"><span class="photo-tag">3:2</span><span class="photo-name">Hero · salão</span></div>
+      <div class="photo-card"><span class="photo-tag">4:5</span><span class="photo-name">Cadeira</span></div>
+      <div class="photo-card"><span class="photo-tag">1:1</span><span class="photo-name">Mesa</span></div>
+      <div class="photo-card"><span class="photo-tag">3:2</span><span class="photo-name">Sala privativa</span></div>
+      <div class="photo-card"><span class="photo-tag">4:5</span><span class="photo-name">Café / copa</span></div>
+      <div class="photo-card"><span class="photo-tag">4:5</span><span class="photo-name">Fundadores</span></div>
+      <div class="photo-card"><span class="photo-tag">3:2</span><span class="photo-name">Fachada</span></div>
+      <div class="photo-card"><span class="photo-tag">1:1</span><span class="photo-name">Marcenaria</span></div>
+    </div>
+
+    <div class="note" style="margin-top: var(--s-8);">
+      <b>Mood:</b> luz natural lateral, tons quentes, plano médio mostrando mãos no teclado. <b>Proibido:</b> equipe sorrindo apontando pra notebook, branco frio fluorescente, HDR.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 13. AI PROMPTS ================================================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">12 · Prompts AI</span>
+    <h2 class="section-title">Só pra moodboard / placeholder</h2>
+    <p class="section-sub">Nunca publique IA no site final — fere a tese "feito com cuidado material". Use estes prompts pra alinhar a sessão de fotografia real.</p>
+
+    <div class="prompt-grid">
+      <div class="prompt-card">
+        <div class="prompt-head"><b>13.1</b> Hero · salão amplo <span>3:2</span></div>
+        <p class="prompt-body">Wide interior of premium coworking, polished concrete, solid-wood desks, leather armchairs, warm pendants, floor-to-ceiling window left, soft 9am side-light. Editorial, shallow DoF, film grain. Cream walls, oak, ink-black metal, single coral accent.</p>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-head"><b>13.2</b> Problema 1 · home office caótico <span>4:5</span></div>
+        <p class="prompt-body">Cluttered home office midday, kitchen table, cereal bowl beside laptop, child toy on chair, harsh fluorescent overhead. Documentary, desaturated. Cool whites, gray, no coral. 28mm f/5.6.</p>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-head"><b>13.3</b> Problema 2 · reunião em cafeteria <span>4:5</span></div>
+        <p class="prompt-body">Two professionals struggling to meet in a crowded café, latte cups, laptop balanced, blurred customers behind. Candid handheld. Mixed window+tungsten light. 50mm f/2.8 slight tilt.</p>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-head"><b>13.4</b> Problema 3 · sala comercial vazia <span>4:5</span></div>
+        <p class="prompt-body">Empty traditional office for rent in small Brazilian city, scuffed walls, fluorescent ceiling, dated linoleum, single dusty desk, "ALUGA-SE" sign. Real-estate listing style. 24mm f/8.</p>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-head"><b>13.5</b> Close · cadeira premium <span>4:5</span></div>
+        <p class="prompt-body">Macro of high-end ergonomic chair in oak + saddle leather, focus on joinery between leather seat and wooden armrest, hand-stitching visible. Soft north-window light upper-left. 90mm macro f/2.8.</p>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-head"><b>13.6</b> Close · mesa de trabalho <span>1:1</span></div>
+        <p class="prompt-body">3/4 view of solid wood desk surface, open Moleskine, fountain pen, half-full ceramic mug, folded tortoiseshell glasses, MacBook edge. Wood grain. Warm afternoon light, single coral pen cap as only saturated accent.</p>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-head"><b>13.7</b> Café / copa <span>4:5</span></div>
+        <p class="prompt-body">Pantry corner, brass espresso machine on marble counter, ceramic mugs on hooks, glass jar of beans, small wood shelf with succulent, Brazilian specialty bag. Side-window soft light. 35mm f/4.</p>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-head"><b>13.8</b> Planta do coworking <span>3:2</span></div>
+        <p class="prompt-body">Architectural floor plan of 350m² space, top-down orthographic, 1.5px ink lines on cream. Open area 16 desks, 3 private rooms, meeting room for 8, café corner, reception. Single coral dot at entrance. Lowercase sans labels.</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top: var(--s-8);">
+      <b>Sempre adicione na descrição:</b> sem pessoas sorrindo, sem rosto AI, sem brilho plástico, sem HDR, sem saturação exagerada, sem logo, sem texto sobreposto. Compare com Kinfolk/Cereal/Dwell antes de aprovar.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 14. MOTION ===================================================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">13 · Motion</span>
+    <h2 class="section-title">Animação serve à hierarquia, nunca à decoração</h2>
+    <p class="section-sub">Quatro categorias, regras claras de uso e de não-uso. Se um efeito não ajuda o leitor a entender ou priorizar, ele não entra.</p>
+
+    <h3 class="subsection-title">13.1 Micro-interações</h3>
+    <p class="section-sub">Resposta imediata ao input. Confirmam "você apertou a coisa certa".</p>
+    <div class="motion-grid">
+      <div class="motion-card">
+        <div class="motion-demo">
+          <button class="btn btn-primary motion-btn">Reservar visita</button>
+        </div>
+        <div class="motion-meta">
+          <b>Botão</b><span>lift 1 px + sombra · 200 ms ease-out</span>
+        </div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-demo">
+          <input class="motion-input" placeholder="seu@email.com" />
+        </div>
+        <div class="motion-meta">
+          <b>Input focus</b><span>anel coral 3 px · cor + shadow</span>
+        </div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-demo">
+          <div class="motion-card-hover">
+            <b>Plano mensal</b>
+            <span>sala flexível</span>
+          </div>
+        </div>
+        <div class="motion-meta">
+          <b>Card hover</b><span>translateY(-2px) + shadow-md · sem scale</span>
+        </div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-demo">
+          <ul class="motion-list">
+            <li>Como funciona o plano anual?</li>
+            <li>Vocês têm sala privativa?</li>
+            <li>Qual o horário de acesso?</li>
+          </ul>
+        </div>
+        <div class="motion-meta">
+          <b>Item de lista</b><span>background-color · 120 ms</span>
+        </div>
+      </div>
+    </div>
+    <div class="note" style="margin-top: var(--s-6);">
+      <b>Não usar em:</b> divs decorativos, ícones soltos, títulos, parágrafos. Se o cursor não vira <code>pointer</code>, não anima.
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">13.2 Scroll reveal</h3>
+    <p class="section-sub">Um padrão único em todo o site: <b>opacity 0→1 + translateY(16px→0)</b>, 500 ms ease-out, stagger de 100 ms.</p>
+    <div class="reveal-demo">
+      <button class="btn btn-secondary" id="reveal-replay">Replay</button>
+      <div class="reveal-grid" id="reveal-grid">
+        <div class="reveal-block">card 1</div>
+        <div class="reveal-block">card 2</div>
+        <div class="reveal-block">card 3</div>
+        <div class="reveal-block">card 4</div>
+      </div>
+    </div>
+    <div class="dodont" style="margin-top: var(--s-8);">
+      <div class="dodont-card do"><div class="dodont-tag">Sim</div><p>Cards de plano, grid de salas, blocos de conteúdo, imagens de seção.</p></div>
+      <div class="dodont-card dont"><div class="dodont-tag">Não</div><p>Hero (já visível), navegação, CTA flutuante, footer. Anima 1× só (<code>unobserve</code>).</p></div>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">13.3 Text animations</h3>
+    <p class="section-sub"><b>Um único uso em todo o site: o H1 do hero.</b> Word-by-word fade up, stagger 60 ms, máx 800 ms.</p>
+    <div class="text-anim-demo">
+      <button class="btn btn-secondary" id="text-replay">Replay</button>
+      <h2 class="text-anim-h1" id="text-anim-h1">
+        <span style="--word-i: 0">O</span>
+        <span style="--word-i: 1">maior</span>
+        <span style="--word-i: 2">coworking</span>
+        <span style="--word-i: 3">de</span>
+        <span style="--word-i: 4">Arapongas.</span>
+      </h2>
+    </div>
+    <div class="note" style="margin-top: var(--s-6);">
+      <b>Estritamente proibido em:</b> H2, H3, qualquer outro título, parágrafos, listas, eyebrows, badges, prices. Animar texto em todo lugar empobrece o efeito (vira default, não assinatura) e cansa o leitor profissional.
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">13.4 WebGL</h3>
+    <p class="section-sub" style="font-weight: 500; color: var(--ink);">Recomendação: <b>não usar</b> neste projeto.</p>
+    <p class="section-sub">Momment vende matéria — madeira, couro, luz natural. Shader animado, mesmo sutil, sinaliza "tech startup", não "coworking premium em cidade do móvel". Se mesmo assim entrar, abaixo está o piso técnico — shader de noise lento em paleta da marca, com fallback CSS. Compare com a alternativa CSS pura: o ganho é mínimo, o custo (bundle, GPU mobile) não é.</p>
+    <div class="webgl-row">
+      <div class="webgl-demo">
+        <canvas class="webgl-canvas" id="webgl-canvas"></canvas>
+        <div class="webgl-fallback" id="webgl-fallback"></div>
+        <div class="webgl-content">
+          <span class="eyebrow" style="color: rgba(255,255,255,0.7);">opção A · WebGL real</span>
+          <h3>Trabalho que pede silêncio.</h3>
+        </div>
+        <span class="webgl-status" id="webgl-status">carregando shader…</span>
+      </div>
+      <div class="webgl-demo webgl-demo-css">
+        <div class="webgl-bg-css"></div>
+        <div class="webgl-content">
+          <span class="eyebrow" style="color: rgba(255,255,255,0.7);">opção B · CSS gradient</span>
+          <h3>Trabalho que pede silêncio.</h3>
+        </div>
+        <span class="webgl-status">~0 kb · sempre funciona</span>
+      </div>
+    </div>
+    <div class="note" style="margin-top: var(--s-6);">
+      <b>Se mesmo assim entrar:</b> só fundo de hero, OGL (não Three.js), reduced-motion fallback estático, mobile fallback CSS, pausar fora do viewport, bundle ≤ 50 kb gzip.
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">13.5 Anti-patterns de motion</h3>
+    <div class="anti-list">
+      <div class="anti-item"><span class="anti-num">01</span><p><b>Nunca <code>transition: all</code>.</b> Lista as propriedades exatas. <code>all</code> anima o que você não sabe que existe e custa frame.</p></div>
+      <div class="anti-item"><span class="anti-num">02</span><p><b>Nunca animar <code>width</code>, <code>height</code>, <code>top</code>, <code>left</code>.</b> Use <code>transform</code>. Animação de layout força reflow e gera jank.</p></div>
+      <div class="anti-item"><span class="anti-num">03</span><p><b>Nunca <code>scale(1.05)</code> em hover de card.</b> Distorce foto, briga com sombra, vira AI-slop. Use <code>translateY(-2px)</code>.</p></div>
+      <div class="anti-item"><span class="anti-num">04</span><p><b>Nunca parallax pesado.</b> Quebra em mobile, ferra reduced-motion, não agrega leitura.</p></div>
+      <div class="anti-item"><span class="anti-num">05</span><p><b>Nunca animação contínua sem pausa.</b> Spinner, gradient, shader — todos pausam fora do viewport ou em reduced-motion.</p></div>
+      <div class="anti-item"><span class="anti-num">06</span><p><b>Nunca <code>cubic-bezier</code> com overshoot</b> (back, bounce, elastic). Não combina com a marca. Use só os tokens da §7.</p></div>
+      <div class="anti-item"><span class="anti-num">07</span><p><b>Nunca animar &gt; 3 elementos por vez.</b> Stagger é ritmo, não festival. Acima disso, divida em grupos sequenciais.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 15. DO/DONT ==================================================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">14 · Anti-padrões gerais</span>
+    <h2 class="section-title">Sim & Não</h2>
+    <p class="section-sub">Os erros mais comuns na recriação deste sistema. Releia antes de cada PR.</p>
+
+    <div class="dodont">
+      <div class="dodont-card do"><div class="dodont-tag">Sim</div><p>Card default branco com <b>hairline</b>. Hover sobe 2 px e ganha shadow-md.</p></div>
+      <div class="dodont-card dont"><div class="dodont-tag">Não</div><p>Todo card com <b>shadow-md</b> permanente — vira gradiente cinza, perde hierarquia.</p></div>
+
+      <div class="dodont-card do"><div class="dodont-tag">Sim</div><p>Coral em <b>1 CTA</b> visível por viewport. Lavender só em decoração.</p></div>
+      <div class="dodont-card dont"><div class="dodont-tag">Não</div><p>Gradiente coral → lavender. A marca tem 2 cores; deixe em paz.</p></div>
+
+      <div class="dodont-card do"><div class="dodont-tag">Sim</div><p>Texto longo alinhado à <b>esquerda</b>, hero também. Imagem à direita.</p></div>
+      <div class="dodont-card dont"><div class="dodont-tag">Não</div><p>Tudo centralizado "porque é mais bonito". É default de quem não decidiu.</p></div>
+
+      <div class="dodont-card do"><div class="dodont-tag">Sim</div><p>Imagens com <b>radius-xl</b> e aspect-ratio 4:5 ou 3:2 — close de detalhe.</p></div>
+      <div class="dodont-card dont"><div class="dodont-tag">Não</div><p>Foto retangular reta 16:9 estilo cinema. Não combina com móvel.</p></div>
+
+      <div class="dodont-card do"><div class="dodont-tag">Sim</div><p>Sombra com 6–12 % de coral. Luz quente caindo na superfície.</p></div>
+      <div class="dodont-card dont"><div class="dodont-tag">Não</div><p>Sombra preta pura padrão Tailwind. Frio, plástico, AI-slop.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- §15 ACESSIBILIDADE ============================ -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">15 · Acessibilidade</span>
+    <h2 class="section-title">Site inacessível falha o cliente que paga mais</h2>
+    <p class="section-sub">Mão cansada de mouse, mãe com bebê no colo, fundador de 60 anos com leitor de tela. Não é caridade — é o cliente real do coworking premium.</p>
+
+    <h3 class="subsection-title">15.1 Contraste · WCAG AA</h3>
+    <div class="col-stack" style="gap: var(--s-2); max-width: 720px;">
+      <div class="contrast-bar pass" style="background:#FFF6F2; color:#101010;"><span><b>ink #101010</b> sobre cream-100 — texto corpo</span><span class="ratio">17.2:1 ✓</span></div>
+      <div class="contrast-bar pass" style="background:#FFF6F2; color:#2A2522;"><span><b>ink-soft #2A2522</b> sobre cream-100 — texto secundário</span><span class="ratio">13.1:1 ✓</span></div>
+      <div class="contrast-bar pass" style="background:#FF7262; color:#FFFFFF;"><span><b>white</b> sobre coral-500 — botão primário</span><span class="ratio">3.4:1 ✓ (≥18px)</span></div>
+      <div class="contrast-bar fail" style="background:#FFD9D2; color:#FF7262;"><span><b>coral</b> sobre coral-100 — texto NÃO usar</span><span class="ratio">1.4:1 ✗</span></div>
+      <div class="contrast-bar fail" style="background:#FFF6F2; color:#BFB4AE;"><span><b>stone-500</b> sobre cream — só decoração, não texto</span><span class="ratio">2.6:1 ✗</span></div>
+    </div>
+    <p class="section-sub" style="margin-top: var(--s-4); max-width: 720px;">Texto corpo ≥ 4.5:1. Texto grande (≥18 px) ≥ 3:1. UI não-textual (border, ícone) ≥ 3:1. Coral em cream passa só pra CTA — nunca pra parágrafo.</p>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">15.2 Focus visible</h3>
+    <p class="section-sub">Anel coral 2 px com 2 px de offset em todo elemento focável. <code>:focus-visible</code>, não <code>:focus</code> — ninguém quer ver anel ao clicar com mouse. Tab nos botões abaixo:</p>
+    <div class="focus-demo">
+      <button class="btn btn--primary">Primário</button>
+      <button class="btn btn--secondary">Secundário</button>
+      <button class="btn btn--ghost">Ghost</button>
+      <a href="#" class="btn btn--secondary">Link</a>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">15.3 Touch target · mínimo 44 × 44 px</h3>
+    <p class="section-sub">WCAG 2.5.5. Mãe com bebê no colo não acerta alvo de 32 px.</p>
+    <div class="touch-grid">
+      <div class="touch-cell bad">32×32</div>
+      <div class="touch-cell good">44×44</div>
+      <div class="touch-cell good" style="width:48px; height:48px;">48×48</div>
+      <div class="touch-cell good" style="width:56px; height:56px;">56 (FAB)</div>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">15.4 Resto do checklist</h3>
+    <div class="a11y-grid">
+      <div class="a11y-card">
+        <h4>Heading semantics</h4>
+        <p>Um único <code>&lt;h1&gt;</code> por página (o título do hero). Nunca pular níveis. "Maior mas mesma hierarquia" é classe no H2, não virar H4.</p>
+      </div>
+      <div class="a11y-card">
+        <h4>Alt text</h4>
+        <p>Imagem informativa: alt descritivo (<i>"sala privativa pra 4 pessoas com mesa de carvalho"</i>). Decorativa: <code>alt=""</code> explícito. Ícone redundante: <code>aria-hidden="true"</code>.</p>
+      </div>
+      <div class="a11y-card">
+        <h4>Navegação por teclado</h4>
+        <p>Menu hambúrguer abre/fecha por teclado, Esc fecha modal, foco preso dentro de modal e devolvido ao gatilho. FAQ com setas ↑↓. Skip link como primeiro elemento focável.</p>
+      </div>
+      <div class="a11y-card">
+        <h4>Reduced motion</h4>
+        <p>Toda animação &gt; 200 ms tem fallback em <code>prefers-reduced-motion: reduce</code>. Reveal vira "já visível", word-by-word vira "tudo junto", gradiente animado vira estático. Ninguém perde conteúdo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- §16 RESPONSIVIDADE =========================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">16 · Responsividade</span>
+    <h2 class="section-title">Mobile-first não é ideologia</h2>
+    <p class="section-sub">70 % dos cliques no WhatsApp vêm de celular. Em Arapongas, WhatsApp é o primeiro canal de contato comercial — celular não é "uma das telas", é <i>a</i> tela.</p>
+
+    <h3 class="subsection-title">16.1 Breakpoints</h3>
+    <p class="section-sub">Mesmos do Tailwind. Dev externo entende sem manual.</p>
+    <div class="bp-strip">
+      <div class="bp-tile"><span class="bp-name">sm</span><span class="bp-px">640</span><span class="bp-use">phone landscape, phablet</span></div>
+      <div class="bp-tile"><span class="bp-name">md</span><span class="bp-px">768</span><span class="bp-use">tablet portrait, "não-mobile"</span></div>
+      <div class="bp-tile"><span class="bp-name">lg</span><span class="bp-px">1024</span><span class="bp-use">tablet landscape, laptop</span></div>
+      <div class="bp-tile"><span class="bp-name">xl</span><span class="bp-px">1280</span><span class="bp-use">desktop padrão</span></div>
+    </div>
+    <p class="section-sub" style="margin-top: var(--s-4); max-width: 720px;">Não use 1440 / 1920. Acima de 1280 o layout pára de crescer; o que cresce é a margem lateral. Container: 1200 px max-width + padding lateral 24 px.</p>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">16.2 Tipografia · fluida × discreta</h3>
+    <div class="a11y-grid">
+      <div class="a11y-card">
+        <h4>Fluida (display)</h4>
+        <p>H1 / H2 / hero usam <code>clamp()</code> — crescem continuamente entre breakpoints. Ex: <code>clamp(36px, 4vw + 16px, 64px)</code> pra h1.</p>
+      </div>
+      <div class="a11y-card">
+        <h4>Discreta (corpo, UI)</h4>
+        <p>Body 16 px em mobile, 17 px em ≥ lg. Pulo único, não fluido. Body fluido em texto longo cansa o olho. Eyebrow / label: 11–12 px sempre, não escala.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">16.3 Layout · regras de stack → side-by-side</h3>
+    <table class="layout-table">
+      <thead><tr><th>Componente</th><th>&lt; 640</th><th>640–768</th><th>768–1024</th><th>≥ 1024</th></tr></thead>
+      <tbody>
+        <tr><td>Cards de plano</td><td>1 col</td><td>1 col</td><td>2 cols</td><td>3 cols</td></tr>
+        <tr><td>Salas / comodidades</td><td>1 col</td><td>2 cols</td><td>2 cols</td><td>3 cols</td></tr>
+        <tr><td>Hero (texto + foto)</td><td>stack</td><td>stack</td><td>60 / 40</td><td>55 / 45</td></tr>
+        <tr><td>FAQ</td><td>1 col</td><td>1 col</td><td>2 cols</td><td>2 cols</td></tr>
+        <tr><td>Footer</td><td>stack</td><td>stack</td><td>2 cols</td><td>4 cols</td></tr>
+        <tr><td>Menu</td><td>hambúrguer</td><td>hambúrguer</td><td>nav horizontal</td><td>nav horizontal</td></tr>
+      </tbody>
+    </table>
+    <p class="section-sub" style="margin-top: var(--s-4); max-width: 720px;"><b>Regra de stack → side-by-side:</b> a transição ocorre quando a coluna menor passa a caber ≥ 280 px sem espremer copy. Não por gosto estético.</p>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">16.4 Imagens responsivas</h3>
+    <div class="a11y-grid">
+      <div class="a11y-card">
+        <h4><code>&lt;picture&gt;</code> + <code>srcset</code></h4>
+        <p>3 tamanhos por foto: 480 / 960 / 1440 (1×) e 2× retina. Não sirva 2400 px pra ninguém — mate na pipeline.</p>
+      </div>
+      <div class="a11y-card">
+        <h4>Formato em ordem</h4>
+        <p>AVIF → WebP → JPG fallback. Nunca PNG pra foto. <code>width</code> e <code>height</code> sempre declarados (HTML attrs) — CLS = 0 é inegociável.</p>
+      </div>
+      <div class="a11y-card">
+        <h4>Loading priority</h4>
+        <p>Hero: <code>loading="eager"</code> + <code>fetchpriority="high"</code> + <code>preload</code>. Tudo abaixo da dobra: <code>loading="lazy"</code>.</p>
+      </div>
+      <div class="a11y-card">
+        <h4>WhatsApp flutuante</h4>
+        <p>FAB 56 px coral, bottom-right, sombra md. Aparece em mobile + tablet (&lt; 1024). Some na seção de formulário. No desktop vive no header.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- §17 TONE OF VOICE ============================ -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">17 · Tone of voice</span>
+    <h2 class="section-title">Soa como o fundador no café</h2>
+    <p class="section-sub">Não como prospecto de SaaS internacional traduzido com Google. Direto, conversacional, sem jargão. Empresário de 50 anos em Arapongas não quer "solução de produtividade" — quer "sala que cabe a equipe".</p>
+
+    <h3 class="subsection-title">17.2 Botões (CTA)</h3>
+    <div class="copy-table">
+      <div class="ch yes">✓ Sim</div><div class="ch no">✗ Não</div>
+      <div class="cell">Quero esse plano</div><div class="cell no">Saiba mais</div>
+      <div class="cell">Reservar visita</div><div class="cell no">Solicitar atendimento</div>
+      <div class="cell">Falar no WhatsApp</div><div class="cell no">Entre em contato</div>
+      <div class="cell">Ver as salas</div><div class="cell no">Conhecer espaços</div>
+      <div class="cell">Comece pelo mensal</div><div class="cell no">Inicie sua jornada</div>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">17.3 Placeholders</h3>
+    <div class="copy-table">
+      <div class="ch yes">✓ Sim</div><div class="ch no">✗ Não</div>
+      <div class="cell">Conta pra gente o que você precisa</div><div class="cell no">Insira sua mensagem</div>
+      <div class="cell">Seu melhor email</div><div class="cell no">Endereço de email</div>
+      <div class="cell">WhatsApp com DDD</div><div class="cell no">Número de telefone</div>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">17.4 Mensagens de erro</h3>
+    <div class="copy-table">
+      <div class="ch yes">✓ Sim</div><div class="ch no">✗ Não</div>
+      <div class="cell">Esse email tá no formato errado. Confere?</div><div class="cell no">Erro de validação</div>
+      <div class="cell">Faltou preencher seu WhatsApp.</div><div class="cell no">Campo obrigatório</div>
+      <div class="cell">Algo deu errado do nosso lado. Tenta de novo em 1 minuto?</div><div class="cell no">Internal Server Error</div>
+    </div>
+    <p class="section-sub" style="margin-top: var(--s-3); max-width: 720px;">Erro <b>explica o que aconteceu</b>, <b>culpa o sistema antes do usuário</b>, e <b>oferece saída</b>.</p>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">17.5 Sucesso</h3>
+    <div class="copy-table">
+      <div class="ch yes">✓ Sim</div><div class="ch no">✗ Não</div>
+      <div class="cell">Recado recebido. A gente responde no WhatsApp em até 1 hora útil.</div><div class="cell no">Formulário enviado com sucesso</div>
+      <div class="cell">Visita agendada. Café no fogão quando você chegar.</div><div class="cell no">Agendamento concluído</div>
+    </div>
+    <p class="section-sub" style="margin-top: var(--s-3); max-width: 720px;">"Café no fogão" é matéria, não copy de SaaS. Sucesso confirma o pedido + diz o próximo passo concreto + tem sabor da marca.</p>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">17.6 Estados vazios</h3>
+    <div class="copy-table">
+      <div class="ch yes">✓ Sim</div><div class="ch no">✗ Não</div>
+      <div class="cell">Ainda não tem reserva por aqui. Que tal começar pelo plano mensal?</div><div class="cell no">Nenhum item encontrado</div>
+      <div class="cell">Vazio por enquanto. Volte depois ou nos chama no zap.</div><div class="cell no">Sem resultados</div>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">17.7 Palavras proibidas no projeto</h3>
+    <p class="section-sub">Nunca, em nenhuma copy do site, app, e-mail, WhatsApp ou rede social. Se você precisa de uma dessas pra explicar a Momment, <b>a explicação está ruim</b> — reescreva concretamente.</p>
+    <div class="banned-list">
+      <span class="banned-tag">inovador</span>
+      <span class="banned-tag">disruptivo</span>
+      <span class="banned-tag">empoderador</span>
+      <span class="banned-tag">solução</span>
+      <span class="banned-tag">plataforma</span>
+      <span class="banned-tag">ecossistema</span>
+      <span class="banned-tag">jornada</span>
+      <span class="banned-tag">experiência premium</span>
+      <span class="banned-tag">alavancar</span>
+      <span class="banned-tag">sinergia</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- §18 ESTADOS DE COMPONENTES =================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">18 · Estados</span>
+    <h2 class="section-title">5 estados canônicos · faltou um, não está pronto</h2>
+    <p class="section-sub">default → hover → loading → empty/error → success/disabled. Skeleton (não spinner). Empty com CTA. Erro com saída. Disabled com motivo.</p>
+
+    <div class="state-grid" style="margin-top: var(--s-8);">
+      <div class="state-card">
+        <span class="state-label">Loading · skeleton</span>
+        <div style="display:flex; flex-direction:column; gap: var(--s-2);">
+          <div class="skeleton-line title"></div>
+          <div class="skeleton-line body"></div>
+          <div class="skeleton-line body"></div>
+          <div class="skeleton-line body short"></div>
+        </div>
+        <p style="font-size: 13px; color: var(--ink-soft); margin-top: var(--s-2);">Spinner é "travou". Skeleton é "vai chegar". Mesma altura e radius do conteúdo final pra CLS = 0.</p>
+      </div>
+
+      <div class="state-card">
+        <span class="state-label">Empty · com CTA</span>
+        <div class="empty-state">
+          <i class="ph ph-armchair" aria-hidden="true"></i>
+          <p>Ainda não tem reserva por aqui.</p>
+          <button class="btn btn--primary btn--sm">Ver os planos</button>
+        </div>
+        <p style="font-size: 13px; color: var(--ink-soft); margin-top: var(--s-2);">Ícone Phosphor 48 px (não foto), microcopy da §17.6, CTA primário com próximo passo óbvio.</p>
+      </div>
+
+      <div class="state-card">
+        <span class="state-label">Error · com recovery</span>
+        <div class="error-state">
+          <i class="ph ph-warning-circle" aria-hidden="true"></i>
+          <div>
+            <p>Algo deu errado do nosso lado. Tenta de novo em 1 minuto?</p>
+            <button class="btn btn--secondary btn--sm">Tentar de novo</button>
+          </div>
+        </div>
+        <p style="font-size: 13px; color: var(--ink-soft); margin-top: var(--s-2);">Nunca tela inteira vermelha. Mensagem em ink, não em vermelho. Sempre tem botão de saída — nunca beco.</p>
+      </div>
+
+      <div class="state-card">
+        <span class="state-label">Success · toast</span>
+        <div class="toast-demo">
+          <i class="ph ph-check-circle" aria-hidden="true"></i>
+          <p>Visita agendada.<br><span style="color: var(--stone-500);">Café no fogão quando você chegar.</span></p>
+        </div>
+        <p style="font-size: 13px; color: var(--ink-soft); margin-top: var(--s-2);">4 s, dismissível, bottom-right desktop / topo mobile. Confirma + próximo passo. Não redirecione antes da pessoa ler.</p>
+      </div>
+
+      <div class="state-card">
+        <span class="state-label">Disabled · com motivo</span>
+        <div class="disabled-demo">
+          <button class="btn btn--primary" disabled>Reservar visita</button>
+          <span class="helper">Preencha email e WhatsApp pra liberar.</span>
+        </div>
+        <p style="font-size: 13px; color: var(--ink-soft); margin-top: var(--s-2);">Botão cinza sem explicação é a falha de UX mais barata de resolver e a mais ignorada. <code>aria-disabled</code> &gt; <code>disabled</code> quando precisar que leitor de tela alcance.</p>
+      </div>
+
+      <div class="state-card">
+        <span class="state-label">Default · referência</span>
+        <button class="btn btn--primary">Reservar visita</button>
+        <p style="font-size: 13px; color: var(--ink-soft); margin-top: var(--s-2);">Estado base. Hover sobe 1 px e ganha shadow-md. Active afunda 1 px com transition mais rápida (150 ms).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- §19 PERFORMANCE BUDGET ======================= -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">19 · Performance</span>
+    <h2 class="section-title">Orçamento real, não ideal</h2>
+    <p class="section-sub">Cliente que abre o site no 4G de Arapongas e espera 6 s pro hero carregar já saiu pra um concorrente. Orçamento abaixo é teto, não meta.</p>
+
+    <h3 class="subsection-title">19.1 Budget por página</h3>
+    <table class="perf-table">
+      <thead><tr><th>Métrica</th><th>Orçamento</th><th>Motivo</th></tr></thead>
+      <tbody>
+        <tr><td>Peso total (home, primeira visita)</td><td class="budget">≤ 1.5 MB</td><td>Mobile 4G médio do interior do PR</td></tr>
+        <tr><td>Hero image</td><td class="budget">≤ 200 KB AVIF · 280 KB WebP</td><td>LCP &lt; 2.5 s</td></tr>
+        <tr><td>JS total (gzip)</td><td class="budget">≤ 100 KB</td><td>Site estático não precisa de framework</td></tr>
+        <tr><td>CSS total (gzip)</td><td class="budget">≤ 60 KB</td><td>Um arquivo, escopado</td></tr>
+        <tr><td>Fonts (4 pesos WOFF2 subset latin)</td><td class="budget">≤ 120 KB</td><td>Display + sans, 2 pesos cada</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">19.3 Core Web Vitals · targets</h3>
+    <div class="cwv-grid">
+      <div class="cwv-card">
+        <span class="cwv-name">LCP</span>
+        <div class="cwv-target">&lt; 2.5s</div>
+        <p class="cwv-desc">Hero image otimizada, <code>fetchpriority="high"</code>, preload do font display.</p>
+      </div>
+      <div class="cwv-card">
+        <span class="cwv-name">CLS</span>
+        <div class="cwv-target">&lt; 0.1</div>
+        <p class="cwv-desc">Toda <code>&lt;img&gt;</code> com width/height. Font com <code>font-display: swap</code> + <code>size-adjust</code>.</p>
+      </div>
+      <div class="cwv-card">
+        <span class="cwv-name">INP</span>
+        <div class="cwv-target">&lt; 200ms</div>
+        <p class="cwv-desc">Sem JS pesado em scroll handler. Sem libração síncrona. Skeleton, não spinner.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">19.4 Bibliotecas proibidas</h3>
+    <div class="anti-list">
+      <div class="anti-item"><span class="anti-num">01</span><p><b>jQuery</b>. É 2026. Vanilla JS faz tudo que você precisa.</p></div>
+      <div class="anti-item"><span class="anti-num">02</span><p><b>Bootstrap, Tailwind UI, Material</b>. Você <b>já tem</b> um design system — é este documento. UI kit genérico anula a tese.</p></div>
+      <div class="anti-item"><span class="anti-num">03</span><p><b>Lottie</b>. Pesado e dispensável — prefira SVG animado com SMIL ou CSS keyframes.</p></div>
+      <div class="anti-item"><span class="anti-num">04</span><p><b>Three.js sem fallback</b>. Recomendação: nem com fallback. Gradiente CSS basta (§14.4).</p></div>
+      <div class="anti-item"><span class="anti-num">05</span><p><b>AOS (Animate On Scroll)</b>. Use IntersectionObserver direto (§14.2). Menos peso, mais controle.</p></div>
+      <div class="anti-item"><span class="anti-num">06</span><p><b>GSAP completo</b>. Só entra se text animation precisar de SplitText. Antes disso, Splitting.js (~3 KB) resolve.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- §20 SEO TÉCNICO ============================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">20 · SEO técnico</span>
+    <h2 class="section-title">Vence em busca local, não em palavra-chave genérica</h2>
+    <p class="section-sub">Quem digita "coworking SP" nunca vai ver a Momment. Quem digita "coworking arapongas" ou "sala de reunião arapongas" é o cliente. SEO aqui é pra esse.</p>
+
+    <h3 class="subsection-title">20.1 Title pattern e SERP preview</h3>
+    <p class="section-sub" style="max-width: 720px;"><b>Pattern</b>: <code>{Página} | Momment Coworking Arapongas</code>. Arapongas em todo title. <b>Sempre</b>. É o ranking factor que ninguém da região ataca direito. Description: 150–160 caracteres, palavra-chave local na primeira metade.</p>
+    <div class="serp-preview" style="margin-top: var(--s-4);">
+      <div class="serp-url">momment.com.br › espacos-e-planos</div>
+      <div class="serp-title">Espaços e planos | Momment Coworking Arapongas</div>
+      <div class="serp-desc">Coworking em Arapongas com salas privativas, mesas em open space e mobiliário premium feito na cidade do móvel. Visite, conheça, decida.</div>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">20.2 Open Graph · share</h3>
+    <div class="seo-block">
+      <code>&lt;meta property="og:title"        content="Momment Coworking Arapongas"&gt;
+&lt;meta property="og:description"  content="Sala, móvel, silêncio. Em Arapongas."&gt;
+&lt;meta property="og:image"        content="https://momment.com.br/og-cover.jpg"&gt; <span style="color:var(--stone-500)">&lt;!-- 1200×630, hero do salão + logo + cidade --&gt;</span>
+&lt;meta property="og:url"          content="https://momment.com.br"&gt;
+&lt;meta property="og:type"         content="website"&gt;
+&lt;meta property="og:locale"       content="pt_BR"&gt;
+&lt;meta name="twitter:card"        content="summary_large_image"&gt;</code>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">20.3 Schema.org · LocalBusiness obrigatório</h3>
+    <p class="section-sub" style="max-width: 720px;">JSON-LD no <code>&lt;head&gt;</code> da home. <b>Não opcional.</b> É o que ativa o card do Google Maps na busca. Conferir os campos com dados reais antes de publicar — schema com dado falso é pior que nenhum schema.</p>
+    <div class="seo-block">
+      <code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "additionalType": "https://schema.org/CoworkingSpace",
+  "name": "Momment Coworking",
+  "image": "https://momment.com.br/og-cover.jpg",
+  "@id": "https://momment.com.br",
+  "url": "https://momment.com.br",
+  "telephone": "+55-43-XXXX-XXXX",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua XYZ, 000",
+    "addressLocality": "Arapongas",
+    "addressRegion": "PR",
+    "postalCode": "86700-000",
+    "addressCountry": "BR"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": -23.4192, "longitude": -51.4250 },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "07:00", "closes": "22:00"
+  }],
+  "priceRange": "R$–R$$"
+}
+&lt;/script&gt;</code>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">20.4 URLs · semânticas, sem id numérico</h3>
+    <div class="url-list">
+      <div class="url-row"><code>/</code><span>home</span></div>
+      <div class="url-row"><code>/espacos-e-planos</code><span>planos + tipos de sala</span></div>
+      <div class="url-row"><code>/sobre</code><span>tese da marca + fundadores</span></div>
+      <div class="url-row"><code>/contato</code><span>formulário + WhatsApp + mapa</span></div>
+      <div class="url-row"><code>/visita</code><span>reserva de visita guiada</span></div>
+    </div>
+    <p class="section-sub" style="margin-top: var(--s-4); max-width: 720px;">Hifenizado, lowercase, sem acento. Sem querystring salvo em filtros legítimos. Não trocar URL depois de publicar — se trocar, redirect 301 obrigatório.</p>
+
+    <h3 class="subsection-title" style="margin-top: var(--s-12);">20.5 Sitemap & robots</h3>
+    <div class="a11y-grid">
+      <div class="a11y-card">
+        <h4><code>sitemap.xml</code></h4>
+        <p>Na raiz, listando as 5 URLs acima. Atualizar quando página nova entrar. Apontar com <code>&lt;link rel="sitemap"&gt;</code> no head.</p>
+      </div>
+      <div class="a11y-card">
+        <h4><code>robots.txt</code></h4>
+        <p>Liberar tudo, apontar <code>Sitemap: https://momment.com.br/sitemap.xml</code>. <b>Não</b> copiar robots genérico do WordPress que bloqueia <code>/wp-admin</code> — não se aplica e parece amador no audit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- §21 CHECKLIST FINAL ========================== -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">21 · Checklist final</span>
+    <h2 class="section-title">Antes de fechar uma tela</h2>
+    <p class="section-sub">Releia. Se uma destas falha, a tela não está pronta — independente de prazo.</p>
+
+    <div class="check-list">
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p><b>1 CTA coral</b> primário no viewport — não 2, não 0. Coral é gesto, não fundo.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Card destacado é <b>Plano Anual</b> ou <b>CTA final</b>. Se não, downgrade para default.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Texto longo em <code>--lh-body</code> (1.7) e ≤ <b>72ch</b> de largura.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Sombras com <b>tinta coral</b> (6–12 %), nunca preto puro.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Foto com <code>border-radius: var(--r-xl)</code> e aspect 4:5, 3:2 ou 1:1 — nunca 16:9.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p><b>Nada centralizado</b> por preguiça. Hero alinhado à esquerda, texto longo à esquerda.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Botão <b>WhatsApp visível</b> (header) ou flutuante em mobile.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p><code>prefers-reduced-motion</code> respeitado em toda animação &gt; 200 ms.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Contraste WCAG AA <b>verificado</b> (texto ≥ 4.5:1, UI ≥ 3:1).</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Focus visible em todo elemento focável — anel coral 2 px + offset.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Touch target <b>≥ 44 × 44 px</b> em mobile.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p><b>Um único <code>&lt;h1&gt;</code></b> por página. Sem pular níveis.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p><code>alt</code> em <b>toda</b> imagem (descritivo ou <code>""</code> explícito).</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Skeleton (não spinner) em loading. Empty com CTA. Erro com saída.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Hero image ≤ <b>200 KB AVIF</b>. Lazy load abaixo da dobra.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Title com <b>"Arapongas"</b>. Schema.org LocalBusiness no head da home.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Nenhuma <b>palavra proibida</b> (§17.7) na copy.</p></div>
+      <div class="check-item"><i class="ph ph-check-circle" aria-hidden="true"></i><p>Phosphor regular, stroke 1.5, <b>uma biblioteca só</b>. Sem emoji em UI.</p></div>
+    </div>
+
+    <p class="note" style="margin-top: var(--s-12);">Se algo aqui atrapalha mais que ajuda, abra issue. Caso contrário: siga.</p>
+  </div>
+</section>
+
+<footer>
+  Momment · Design System v1.0 · Veja também <a href="DESIGN.md">DESIGN.md</a>
+</footer>
+
+<script>
+(function() {
+  // §13.2 Scroll reveal: IntersectionObserver
+  const blocks = document.querySelectorAll('.reveal-block');
+  blocks.forEach((el, i) => { el.style.transitionDelay = (i * 100) + 'ms'; });
+
+  const triggerReveal = () => {
+    blocks.forEach(b => b.classList.add('is-visible'));
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+  blocks.forEach(el => io.observe(el));
+
+  // Safety net: if blocks already in viewport on load OR IO is throttled,
+  // force visible after a short delay so the demo always works.
+  setTimeout(() => {
+    blocks.forEach(b => {
+      const r = b.getBoundingClientRect();
+      const inView = r.top < window.innerHeight && r.bottom > 0;
+      if (inView && !b.classList.contains('is-visible')) {
+        b.classList.add('is-visible');
+      }
+    });
+  }, 100);
+
+  document.getElementById('reveal-replay')?.addEventListener('click', () => {
+    blocks.forEach(el => el.classList.remove('is-visible'));
+    // Force reflow then re-add
+    void document.body.offsetWidth;
+    setTimeout(() => triggerReveal(), 50);
+  });
+
+  // §14.3 Text animation replay
+  const h1 = document.getElementById('text-anim-h1');
+  document.getElementById('text-replay')?.addEventListener('click', () => {
+    if (!h1) return;
+    h1.classList.add('replay');
+    void h1.offsetWidth; // reflow
+    h1.classList.remove('replay');
+  });
+})();
+</script>
+
+<script type="module">
+// §13.4 WebGL demo — OGL shader (slow noise in brand palette).
+// Real implementation, not fake. Pauses out of viewport. Honors reduced-motion.
+(async () => {
+  const canvas = document.getElementById('webgl-canvas');
+  const fallback = document.getElementById('webgl-fallback');
+  const status = document.getElementById('webgl-status');
+  if (!canvas || !fallback || !status) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.matchMedia('(max-width: 700px)').matches;
+
+  // Mobile: skip WebGL entirely (per spec — bundle/GPU cost).
+  if (isMobile) {
+    status.textContent = 'mobile · CSS fallback';
+    return; // fallback already visible
+  }
+
+  try {
+    const { Renderer, Program, Mesh, Triangle } = await import('https://cdn.jsdelivr.net/npm/ogl@1.0.11/+esm');
+
+    const renderer = new Renderer({ canvas, alpha: false, dpr: Math.min(window.devicePixelRatio, 2) });
+    const gl = renderer.gl;
+    gl.clearColor(0.10, 0.08, 0.19, 1);
+
+    const vertex = /* glsl */ `
+      attribute vec2 position;
+      varying vec2 vUv;
+      void main() {
+        vUv = position * 0.5 + 0.5;
+        gl_Position = vec4(position, 0.0, 1.0);
+      }
+    `;
+
+    // Slow value-noise → soft warm/cool blobs in brand palette.
+    const fragment = /* glsl */ `
+      precision highp float;
+      uniform float uTime;
+      uniform vec2 uResolution;
+      varying vec2 vUv;
+
+      // 2D hash + value noise
+      float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float noise(vec2 p) {
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+        vec2 u = f * f * (3.0 - 2.0 * f);
+        float a = hash(i);
+        float b = hash(i + vec2(1.0, 0.0));
+        float c = hash(i + vec2(0.0, 1.0));
+        float d = hash(i + vec2(1.0, 1.0));
+        return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+      }
+      float fbm(vec2 p) {
+        float v = 0.0; float a = 0.5;
+        for (int i = 0; i < 4; i++) {
+          v += a * noise(p);
+          p *= 2.0; a *= 0.5;
+        }
+        return v;
+      }
+
+      void main() {
+        vec2 uv = vUv;
+        // aspect correct
+        uv.x *= uResolution.x / uResolution.y;
+
+        float t = uTime * 0.04; // very slow
+        float n = fbm(uv * 1.6 + vec2(t, t * 0.7));
+        float n2 = fbm(uv * 2.4 - vec2(t * 0.5, -t * 0.3));
+
+        // Brand palette: noite #1A1430 → ameixa #2D2348 → lavanda profunda #5A4A8C → tinta #C9A86A whisper
+        vec3 noite   = vec3(0.102, 0.078, 0.188);
+        vec3 ameixa  = vec3(0.176, 0.137, 0.282);
+        vec3 lavanda = vec3(0.353, 0.290, 0.549);
+        vec3 ouro    = vec3(0.788, 0.659, 0.416);
+
+        vec3 col = mix(noite, ameixa, smoothstep(0.2, 0.7, n));
+        col = mix(col, lavanda, smoothstep(0.55, 0.95, n) * 0.85);
+        col = mix(col, ouro, smoothstep(0.85, 1.0, n2) * 0.18);
+
+        // subtle vignette
+        vec2 q = vUv - 0.5;
+        float vig = 1.0 - dot(q, q) * 0.6;
+        col *= vig;
+
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `;
+
+    const geometry = new Triangle(gl);
+    const program = new Program(gl, {
+      vertex,
+      fragment,
+      uniforms: {
+        uTime: { value: 0 },
+        uResolution: { value: [1, 1] },
+      },
+    });
+    const mesh = new Mesh(gl, { geometry, program });
+
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const w = Math.max(1, rect.width);
+      const h = Math.max(1, rect.height);
+      renderer.setSize(w, h);
+      program.uniforms.uResolution.value = [w, h];
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Hide fallback once we render successfully.
+    fallback.style.opacity = '0';
+    status.textContent = 'WebGL · ~14 kb · OGL';
+
+    // Render one frame immediately so the canvas is never blank,
+    // even if IO fires "not intersecting" before the first rAF tick.
+    renderer.render({ scene: mesh });
+
+    let raf = 0;
+    let inView = true;
+    let lastT = performance.now();
+
+    if (reduce) {
+      // Render one static frame, then stop.
+      program.uniforms.uTime.value = 12.0;
+      renderer.render({ scene: mesh });
+      status.textContent = 'WebGL · estático (reduced-motion)';
+      return;
+    }
+
+    const loop = (now) => {
+      raf = requestAnimationFrame(loop);
+      const dt = Math.min((now - lastT) / 1000, 0.05);
+      lastT = now;
+      if (inView && !document.hidden) {
+        program.uniforms.uTime.value += dt;
+        renderer.render({ scene: mesh });
+      }
+    };
+    raf = requestAnimationFrame(loop);
+
+    // Pause out of viewport. Defer observe by a tick so the loop has
+    // at least one chance to render before IO can flip inView=false.
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { inView = e.isIntersecting; });
+    }, { threshold: 0 });
+    setTimeout(() => io.observe(canvas), 200);
+  } catch (err) {
+    console.warn('WebGL demo failed, using CSS fallback:', err);
+    status.textContent = 'fallback CSS (sem WebGL)';
+  }
+})();
+</script>
+
+</body>
+</html>
