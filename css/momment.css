@@ -3940,6 +3940,156 @@ html { scroll-padding-top: 100px; }
 }
 
 /* ============================================================
+   SPACES CAROUSEL — mobile only
+   Replaces the tab-list + single preview with a horizontal scroll-snap
+   carousel of 5 self-contained cards. Native swipe, pagination dots.
+   ============================================================ */
+.spaces__carousel {
+  display: none; /* hidden on desktop, shown on mobile via media query */
+  flex-direction: column;
+  gap: var(--s-5);
+  width: 100%;
+}
+.spaces__carousel-track {
+  display: flex;
+  gap: var(--s-4);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  /* Bleed slightly past the section padding so swiping feels edge-to-edge */
+  margin-inline: calc(var(--s-6) * -1);
+  padding-inline: var(--s-6);
+  scroll-padding-inline: var(--s-6);
+}
+.spaces__carousel-track::-webkit-scrollbar { display: none; }
+
+.space-card {
+  flex: 0 0 calc(100% - var(--s-8));
+  scroll-snap-align: start;
+  background: var(--white);
+  border: 1px solid var(--stone-200);
+  border-radius: var(--r-xl);
+  padding: var(--s-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  overflow: hidden;
+}
+.space-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--cream-200);
+}
+.space-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.space-card__badge {
+  position: absolute;
+  bottom: var(--s-3);
+  right: var(--s-3);
+  background: var(--cream-100);
+  color: var(--ink);
+  padding: 6px 12px;
+  border-radius: var(--r-full);
+  font: 600 12px/1 var(--font-sans);
+  letter-spacing: 0.04em;
+  box-shadow: var(--shadow-md);
+}
+.space-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4) var(--s-5);
+  text-align: center;
+  align-items: center;
+}
+.space-card__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
+}
+.space-card__desc {
+  font: 400 15px/1.55 var(--font-sans);
+  color: var(--ink-soft);
+  margin: 0;
+}
+.space-card__amenities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--stone-200);
+  width: 100%;
+}
+.space-card__amenity {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 500 13px/1.2 var(--font-sans);
+  color: var(--ink);
+}
+.space-card__amenity i { font-size: 16px; color: var(--coral-500); }
+.space-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  background: var(--coral-500);
+  color: var(--white);
+  padding: 14px 22px;
+  border-radius: var(--r-md);
+  font: 500 15px/1 var(--font-sans);
+  text-decoration: none;
+  margin-top: var(--s-2);
+  transition: background-color var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+.space-card__cta:hover { background: var(--coral-600); transform: translateY(-2px); }
+.space-card__cta i { font-size: 16px; }
+
+/* Pagination dots */
+.spaces__carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--s-2);
+}
+.spaces__carousel-dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--stone-300);
+  cursor: pointer;
+  transition: background-color var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+.spaces__carousel-dots button:hover { background: var(--stone-500); }
+.spaces__carousel-dots button.is-active {
+  background: var(--coral-500);
+  transform: scale(1.4);
+}
+
+/* Visibility swap: tabs+preview on desktop, carousel on mobile */
+@media (max-width: 1023px) {
+  .spaces__list,
+  .space-preview { display: none; }
+  .spaces__carousel { display: flex; }
+  .spaces__layout { gap: 0; }
+}
+
+/* ============================================================
    MOBILE NAV DRAWER
    Injected into body by JS on every page. Hamburger toggles it.
    ============================================================ */

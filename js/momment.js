@@ -183,6 +183,78 @@
   }
 
   tabs.forEach(t => t.addEventListener('click', () => selectSpace(t.dataset.space)));
+
+  /* ---------- Mobile carousel — built from SPACES data, only visible on <1024px ---------- */
+  const layout = document.querySelector('.spaces__layout');
+  if (layout && Object.keys(SPACES).length) {
+    const carousel = document.createElement('div');
+    carousel.className = 'spaces__carousel';
+    carousel.setAttribute('role', 'region');
+    carousel.setAttribute('aria-label', 'Espaços da Momment');
+
+    const track = document.createElement('div');
+    track.className = 'spaces__carousel-track';
+
+    const keys = Object.keys(SPACES);
+    keys.forEach((key, i) => {
+      const s = SPACES[key];
+      const card = document.createElement('article');
+      card.className = 'space-card';
+      card.dataset.space = key;
+      card.innerHTML = `
+        <figure class="space-card__media">
+          <img src="${s.image}" alt="${s.name}" loading="lazy">
+          <span class="space-card__badge">${s.meters}</span>
+        </figure>
+        <div class="space-card__body">
+          <h3 class="space-card__name">${s.name}</h3>
+          <p class="space-card__desc">${s.desc}</p>
+          <div class="space-card__amenities">
+            ${s.amenities.map(([icon, label]) => `<span class="space-card__amenity"><i class="ph ph-${icon}"></i> ${label}</span>`).join('')}
+          </div>
+          <a href="#planos" class="space-card__cta">Ver detalhes <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      `;
+      track.appendChild(card);
+    });
+
+    const dots = document.createElement('div');
+    dots.className = 'spaces__carousel-dots';
+    dots.setAttribute('role', 'tablist');
+    keys.forEach((_, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.dataset.i = i;
+      btn.setAttribute('aria-label', `Ver espaço ${i + 1}`);
+      if (i === 0) btn.classList.add('is-active');
+      dots.appendChild(btn);
+    });
+
+    carousel.appendChild(track);
+    carousel.appendChild(dots);
+    layout.appendChild(carousel);
+
+    // Active dot tracking via IntersectionObserver
+    const cards = track.querySelectorAll('.space-card');
+    const dotBtns = dots.querySelectorAll('button');
+    const cardIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.intersectionRatio >= 0.6) {
+          const idx = [...cards].indexOf(e.target);
+          dotBtns.forEach((b, i) => b.classList.toggle('is-active', i === idx));
+        }
+      });
+    }, { root: track, threshold: [0.6] });
+    cards.forEach(c => cardIO.observe(c));
+
+    // Click dot → scroll to card
+    dotBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.i, 10);
+        cards[idx].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      });
+    });
+  }
 })();
 
 /* ============================================================
