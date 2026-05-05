@@ -3983,6 +3983,8 @@ html { scroll-padding-top: 100px; }
   border-radius: var(--r-md);
   overflow: hidden;
   background: var(--cream-200);
+  margin: 0;
+  width: 100%;
 }
 .space-card__media img {
   width: 100%;
